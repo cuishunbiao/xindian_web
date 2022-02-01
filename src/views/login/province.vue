@@ -3,13 +3,15 @@
         <span class="cicle_box"></span>
     </div>
     <div class="login_body">
-        <div class="login_body_logo"><img src="/src/assets/images/logo.png" alt="心电一张网"></div>
+        <div class="login_body_title">
+            <h2>选择区域</h2>
+        </div>
         <div class="login_body_content">
             <li>
-                <div class="content_label">所属机构</div>
+                <div class="content_label">选择省</div>
                 <div class="content_form border borderBottom">
                     <select name="" id="">
-                        <option value="-1">请选择所属机构</option>
+                        <option value="-1">请选择省</option>
                         <option value="红方">红方</option>
                         <option value="红方">红方</option>
                         <option value="红方">红方</option>
@@ -17,35 +19,29 @@
                 </div>
             </li>
             <li>
-                <div class="content_label">账号</div>
+                <div class="content_label">选择市</div>
                 <div class="content_form border borderBottom">
                     <select name="" id="">
-                        <option value="-1">请选择账号</option>
+                        <option value="-1">请选择市</option>
                         <option value="红方">红方</option>
                         <option value="红方">红方</option>
                         <option value="红方">红方</option>
                     </select>
-                </div>
-            </li>
-            <li>
-                <div class="content_label">密码</div>
-                <div class="content_form border borderBottom">
-                    <input type="password" placeholder="请输入密码">
                 </div>
             </li>
         </div>
     </div>
     <div class="login_footer">
-        <button class="login_submit" @click="submitFn()">登录</button>
+        <button class="login_submit" @click="submitFn()">下一步</button>
     </div>
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-const router = useRouter();
-const submitFn = () => {
-    router.push("/province");
-}
+    import { useRouter } from 'vue-router';
+    const router = useRouter();
+    const submitFn = () => {
+        router.push("/hospital");
+    }
 </script>
 
 <style lang="scss" scoped>

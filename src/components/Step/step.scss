@@ -1,0 +1,51 @@
+h2 {
+	margin: 0.53rem 0 0.47rem 0;
+	font-size: 0.45rem;
+	color: #333;
+	font-weight: bold;
+}
+.step_box {
+	display: block;
+	background-color: #f7f7f7;
+	box-shadow: 0px 2px 0.57rem 0px rgba(183, 183, 183, 0.1);
+	border-radius: 0.27rem;
+	margin-bottom: 0.2rem;
+	font-size: 0.37rem;
+	font-weight: bold;
+	position: relative;
+	overflow: hidden;
+	font-size: 0.37rem;
+	color: #333;
+	.step_box_content {
+		padding: 0.36rem 0.24rem 0.29rem 0.44rem;
+		margin-bottom: 0.13rem;
+		background-color: #fff;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+	&::before {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 0.13rem;
+		height: 100%;
+		content: '';
+		background-color: #b62940;
+	}
+}
+.step_box_content_flex {
+	clear: both;
+	display: flex;
+	.step_box_left {
+		flex: 1;
+		&.step_box_left_label {
+			color: #999;
+		}
+	}
+	.step_box_right {
+	}
+	.step_box_right_button {
+		flex: 0 0 1.87rem;
+	}
+}
