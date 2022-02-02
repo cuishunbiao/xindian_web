@@ -7,19 +7,19 @@
                 <p>阶段1</p>
             </div>
         </li>
-        <li class="on">
+        <li>
             <div class="info_tabs_content">
                 <span></span>
                 <p>阶段2</p>
             </div>
         </li>
-        <li class="on">
+        <li>
             <div class="info_tabs_content">
                 <span></span>
                 <p>阶段3</p>
             </div>
         </li>
-        <li class="on">
+        <li>
             <div class="info_tabs_content">
                 <span></span>
                 <p>阶段4</p>
@@ -31,6 +31,9 @@
         <StepTwo />
         <StepThree />
         <StepFour />
+    </div>
+    <div class="info_footer">
+        <button class="info_submit">下一步阶段</button>
     </div>
 </div>
 </template>
@@ -45,7 +48,8 @@
 <style lang="scss" scoped>
 .info{
     background-color: #f7f7f7;
-    height: 100%;
+    min-height: 100%;
+    padding-bottom: 2.4rem;
 }
 .info_tabs{
     display: flex;
@@ -113,5 +117,31 @@
 .info_content{
     width: 92%;
     margin: 0 auto;
+}
+.info_footer{
+    height: 2.4rem;
+    position: fixed;
+    z-index: 2;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    .info_submit{
+        width: 8rem;
+		height: 1.31rem;
+		background: linear-gradient(90deg, #8e0052 0%, #e14145 99%);
+		border-radius: 0.65rem;
+		font-size: 0.48rem;
+		color: #fff;
+		transition: background 0.2s linear;
+		cursor: pointer;
+		&:hover,
+		&:focus {
+			background: linear-gradient(90deg, #900052 0%, #ba1d4a 99%);
+		}
+    }
 }
 </style>
