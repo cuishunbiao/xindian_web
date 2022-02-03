@@ -17,6 +17,7 @@ import "./assets/mobileSelect/mobileSelect.js"
 	styleNode.innerHTML = "html {font-size: "+ width +"px !important}"
 	document.head.appendChild(styleNode)
 })()
+
 </script>
 
 <style lang="scss">

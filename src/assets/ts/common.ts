@@ -21,4 +21,23 @@ for (var m = 0; m < 60; m++) {
 	MINUTER.push(parseIntNum(m))
 }
 
-export { YEARNUM, MONTHNUM, DAYNUM, HOUR, MINUTER }
+const errorFn = (text: string) => {
+	if (document.getElementById('error-container')) return
+	const dom = document.createElement('div')
+	dom.className = 'error-container'
+	dom.id = 'error-container'
+	const domcon = document.createElement('div')
+	domcon.className = 'error-content'
+	domcon.id = 'error-content'
+	const domspan = document.createElement('span')
+	domspan.innerHTML = text
+	domcon.appendChild(domspan)
+	dom.appendChild(domcon)
+	document.body.appendChild(dom)
+	setTimeout(() => {
+		const errorDom: any = document.getElementById('error-container')
+		document.body.removeChild(errorDom)
+	}, 2500)
+}
+
+export { YEARNUM, MONTHNUM, DAYNUM, HOUR, MINUTER, errorFn }

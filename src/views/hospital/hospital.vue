@@ -2,19 +2,44 @@
     <div class="hospital">
         <div class="hospital_content">
             <div class="hospital_search">
-                <input type="text" placeholder="请输入医院名称">
+                <input v-model="hospital_name" type="text" placeholder="请输入医院名称">
             </div>
             <div class="hospital_list">
-                <router-link :to="{path:'/info/step1',query:{hospital_id: 1}}">北京大学人民医院</router-link>
-                <router-link :to="{path:'/info/step2',query:{hospital_id: 2}}">北京大学人民医院</router-link>
-                <router-link :to="{path:'/info/step3',query:{hospital_id: 3}}">北京大学人民医院</router-link>
-                <router-link :to="{path:'/info/step4',query:{hospital_id: 4}}">北京大学人民医院</router-link>
+                <router-link v-for="(item, index) in hospitalLists" :key="index" :to="{path:'/info/step1',query:{hospital_id: item.id}}">{{item.name}}</router-link>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+    import { ref, watch } from 'vue'
+    import { useRoute } from 'vue-router';
+    import { getHospitalApi } from '@Request/api'
+    import { errorFn } from '@Assets/ts/common'
+
+    const { city } = useRoute().query
+    const hospitalLists = ref<any[]>([])
+    const hospital_name = ref('')
+
+    //获取医院
+    const getHospitalFn = () => {
+        getHospitalApi({
+            city,
+            hospital_name: hospital_name.value
+        }).then((res: any)=>{
+            if (res.status === 1){
+                hospitalLists.value = res.data.lists
+            } else {
+                errorFn(res.msg)
+            }
+        })
+    }
+    getHospitalFn()
+
+    watch(() => hospital_name.value, (val)=>{
+        getHospitalFn()
+    })
+
 </script>
 
 <style lang="scss" scoped>

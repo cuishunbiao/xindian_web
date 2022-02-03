@@ -39,7 +39,7 @@
 </div>
 
 <div class="info_footer">
-    <button class="info_submit">下一步阶段3</button>
+    <button class="info_submit">下一步阶段4</button>
 </div>
 </template>
 
