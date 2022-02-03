@@ -3,6 +3,8 @@
 </template>
 
 <script setup lang="ts">
+import "./assets/mobileSelect/mobile-select.css"
+import "./assets/mobileSelect/mobileSelect.js"
 // 先创建一个style标签
 // 给标签添加内容，内容就为根标签的字体大小
 // 然后将创建的style标签放到head标签中

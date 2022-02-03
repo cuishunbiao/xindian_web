@@ -5,10 +5,10 @@
                 <input type="text" placeholder="请输入医院名称">
             </div>
             <div class="hospital_list">
-                <router-link :to="{path:'/info',query:{hospital_id: 1}}">北京大学人民医院</router-link>
-                <router-link :to="{path:'/info',query:{hospital_id: 2}}">北京大学人民医院</router-link>
-                <router-link :to="{path:'/info',query:{hospital_id: 3}}">北京大学人民医院</router-link>
-                <router-link :to="{path:'/info',query:{hospital_id: 4}}">北京大学人民医院</router-link>
+                <router-link :to="{path:'/info/step1',query:{hospital_id: 1}}">北京大学人民医院</router-link>
+                <router-link :to="{path:'/info/step2',query:{hospital_id: 2}}">北京大学人民医院</router-link>
+                <router-link :to="{path:'/info/step3',query:{hospital_id: 3}}">北京大学人民医院</router-link>
+                <router-link :to="{path:'/info/step4',query:{hospital_id: 4}}">北京大学人民医院</router-link>
             </div>
         </div>
     </div>

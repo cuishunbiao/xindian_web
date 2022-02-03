@@ -1,25 +1,25 @@
 <template>
 <div class="info">
     <ul class="info_tabs">
-        <li class="on">
+        <li @click="goStepFn(1)" class="on">
             <div class="info_tabs_content">
                 <span></span>
                 <p>阶段1</p>
             </div>
         </li>
-        <li>
+        <li @click="goStepFn(2)" :class="{'on': currentIndex >= 2}">
             <div class="info_tabs_content">
                 <span></span>
                 <p>阶段2</p>
             </div>
         </li>
-        <li>
+        <li @click="goStepFn(3)" :class="{'on': currentIndex >= 3}">
             <div class="info_tabs_content">
                 <span></span>
                 <p>阶段3</p>
             </div>
         </li>
-        <li>
+        <li @click="goStepFn(4)" :class="{'on': currentIndex >= 4}">
             <div class="info_tabs_content">
                 <span></span>
                 <p>阶段4</p>
@@ -27,25 +27,51 @@
         </li>
     </ul>
     <div class="info_content">
-        <StepOne />
-        <StepTwo />
-        <StepThree />
-        <StepFour />
-    </div>
-    <div class="info_footer">
-        <button class="info_submit">下一步阶段</button>
+        <router-view></router-view>
     </div>
 </div>
 </template>
 
 <script setup lang="ts">
-    import StepOne from '@/components/Step/StepOne.vue';
-    import StepTwo from '@/components/Step/StepTwo.vue';
-    import StepThree from '@/components/Step/StepThree.vue';
-    import StepFour from '@/components/Step/StepFour.vue';
+    import { ref, watch } from 'vue';
+    import { useRoute, useRouter } from 'vue-router';
+    const router = useRouter()
+    const route = useRoute()
+    const currentIndex = ref(1);
+    
+    watch(() => route.path, (path) => {
+        switch (path) {
+            case '/info/step1':
+                currentIndex.value = 1
+                break;
+            case '/info/step2':
+                currentIndex.value = 2
+                break;
+            case '/info/step3':
+                currentIndex.value = 3
+                break;
+            case '/info/step4':
+                currentIndex.value = 4
+                break;
+            default:
+                currentIndex.value = 1
+                return;
+        }
+        console.log(path,'监听到变化')
+    })
+
+
+    
+    const goStepFn = (stepNumber: Number) => {
+        router.push({
+            path: `/info/step${stepNumber}`,
+            query: route.query
+        });
+    }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import './../../assets/scss/step.scss';
 .info{
     background-color: #f7f7f7;
     min-height: 100%;
@@ -134,7 +160,7 @@
 		height: 1.31rem;
 		background: linear-gradient(90deg, #8e0052 0%, #e14145 99%);
 		border-radius: 0.65rem;
-		font-size: 0.48rem;
+		font-size: 0.4rem;
 		color: #fff;
 		transition: background 0.2s linear;
 		cursor: pointer;
