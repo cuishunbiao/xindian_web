@@ -1,162 +1,163 @@
 <template>
-<div class="info">
-    <ul class="info_tabs">
-        <li @click="goStepFn(1)" class="on">
-            <div class="info_tabs_content">
-                <span></span>
-                <p>阶段1</p>
-            </div>
-        </li>
-        <li @click="goStepFn(2)" :class="{'on': currentIndex >= 2}">
-            <div class="info_tabs_content">
-                <span></span>
-                <p>阶段2</p>
-            </div>
-        </li>
-        <li @click="goStepFn(3)" :class="{'on': currentIndex >= 3}">
-            <div class="info_tabs_content">
-                <span></span>
-                <p>阶段3</p>
-            </div>
-        </li>
-        <li @click="goStepFn(4)" :class="{'on': currentIndex >= 4}">
-            <div class="info_tabs_content">
-                <span></span>
-                <p>阶段4</p>
-            </div>
-        </li>
-    </ul>
-    <div class="info_content">
-        <router-view></router-view>
-    </div>
-</div>
+	<div class="info">
+		<ul class="info_tabs">
+			<li @click="goStepFn(1)" class="on">
+				<div class="info_tabs_content">
+					<span></span>
+					<p>阶段1</p>
+				</div>
+			</li>
+			<li @click="goStepFn(2)" :class="{ on: currentIndex >= 2 }">
+				<div class="info_tabs_content">
+					<span></span>
+					<p>阶段2</p>
+				</div>
+			</li>
+			<li @click="goStepFn(3)" :class="{ on: currentIndex >= 3 }">
+				<div class="info_tabs_content">
+					<span></span>
+					<p>阶段3</p>
+				</div>
+			</li>
+			<li @click="goStepFn(4)" :class="{ on: currentIndex >= 4 }">
+				<div class="info_tabs_content">
+					<span></span>
+					<p>阶段4</p>
+				</div>
+			</li>
+		</ul>
+		<div class="info_content">
+			<router-view></router-view>
+		</div>
+	</div>
 </template>
 
 <script setup lang="ts">
-    import { ref, watch } from 'vue';
-    import { useRoute, useRouter } from 'vue-router';
-    const router = useRouter()
-    const route = useRoute()
-    const currentIndex = ref(1);
-    
-    watch(() => route.path, (path) => {
-        switch (path) {
-            case '/info/step1':
-                currentIndex.value = 1
-                break;
-            case '/info/step2':
-                currentIndex.value = 2
-                break;
-            case '/info/step3':
-                currentIndex.value = 3
-                break;
-            case '/info/step4':
-                currentIndex.value = 4
-                break;
-            default:
-                currentIndex.value = 1
-                return;
-        }
-        console.log(path,'监听到变化')
-    })
+import { ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+const router = useRouter()
+const route = useRoute()
+const currentIndex = ref(1)
 
+watch(
+	() => route.path,
+	(path) => {
+		switch (path) {
+			case '/info/step1':
+				currentIndex.value = 1
+				break
+			case '/info/step2':
+				currentIndex.value = 2
+				break
+			case '/info/step3':
+				currentIndex.value = 3
+				break
+			case '/info/step4':
+				currentIndex.value = 4
+				break
+			default:
+				currentIndex.value = 1
+				return
+		}
+		console.log(path, '监听到变化')
+	}
+)
 
-    
-    const goStepFn = (stepNumber: Number) => {
-        router.push({
-            path: `/info/step${stepNumber}`,
-            query: route.query
-        });
-    }
+const goStepFn = (stepNumber: Number) => {
+	router.push({
+		path: `/info/step${stepNumber}`,
+		query: route.query
+	})
+}
 </script>
 
 <style lang="scss">
 @import './../../assets/scss/step.scss';
-.info{
-    background-color: #f7f7f7;
-    min-height: 100%;
-    padding-bottom: 2.4rem;
+.info {
+	background-color: #f7f7f7;
+	min-height: 100%;
+	padding-bottom: 2.4rem;
 }
-.info_tabs{
-    display: flex;
-    width: 100%;
-    height: 2.09rem;
-    color: #fff;
-    background: linear-gradient(9deg, rgba(219, 60, 71, 1), rgba(146, 3, 81, 1));
-    li{
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        &::before{
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 50%;
-            margin-top: -.25rem;
-            width: 50%;
-            height: .05rem;
-            background-color: #fff;
-        }
-        &::after{
-            content: "";
-            position: absolute;
-            right: 0;
-            top: 50%;
-            margin-top: -.25rem;
-            width: 50%;
-            height: .05rem;
-            background-color: #fff;
-        }
-        &:first-child::before{
-            width: 0;
-        }
-        &:last-child::after{
-            width: 0;
-        }
-        .info_tabs_content{
-            width: 100%;
-            text-align: center;
-            padding-top: .2rem;
-            span{
-                width: .4rem;
-                height: .4rem;
-                display: block;
-                margin: 0 auto;
-                background: url('/src/assets/images/icon_tabs_false.png') no-repeat left center;
-                background-size: .4rem .4rem;
-                position: relative;
-                z-index: 1;
-            }
-            p{
-                margin-top: .15rem;
-                font-size: .35rem;
-            }
-        }
-        &.on .info_tabs_content span{
-            background: url('/src/assets/images/icon_tabs_true.png') no-repeat left center;
-                background-size: .4rem .4rem;
-        }
-    }
+.info_tabs {
+	display: flex;
+	width: 100%;
+	height: 2.09rem;
+	color: #fff;
+	background: linear-gradient(9deg, rgba(219, 60, 71, 1), rgba(146, 3, 81, 1));
+	li {
+		flex: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		&::before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 50%;
+			margin-top: -0.25rem;
+			width: 50%;
+			height: 0.05rem;
+			background-color: #fff;
+		}
+		&::after {
+			content: '';
+			position: absolute;
+			right: 0;
+			top: 50%;
+			margin-top: -0.25rem;
+			width: 50%;
+			height: 0.05rem;
+			background-color: #fff;
+		}
+		&:first-child::before {
+			width: 0;
+		}
+		&:last-child::after {
+			width: 0;
+		}
+		.info_tabs_content {
+			width: 100%;
+			text-align: center;
+			padding-top: 0.2rem;
+			span {
+				width: 0.4rem;
+				height: 0.4rem;
+				display: block;
+				margin: 0 auto;
+				background: url('/src/assets/images/icon_tabs_false.png') no-repeat left center;
+				background-size: 0.4rem 0.4rem;
+				position: relative;
+				z-index: 1;
+			}
+			p {
+				margin-top: 0.15rem;
+				font-size: 0.35rem;
+			}
+		}
+		&.on .info_tabs_content span {
+			background: url('/src/assets/images/icon_tabs_true.png') no-repeat left center;
+			background-size: 0.4rem 0.4rem;
+		}
+	}
 }
-.info_content{
-    width: 92%;
-    margin: 0 auto;
+.info_content {
+	width: 92%;
+	margin: 0 auto;
 }
-.info_footer{
-    height: 2.4rem;
-    position: fixed;
-    z-index: 2;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    .info_submit{
-        width: 8rem;
+.info_footer {
+	height: 2.4rem;
+	position: fixed;
+	z-index: 2;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	.info_submit {
+		width: 8rem;
 		height: 1.31rem;
 		background: linear-gradient(90deg, #8e0052 0%, #e14145 99%);
 		border-radius: 0.65rem;
@@ -168,6 +169,6 @@
 		&:focus {
 			background: linear-gradient(90deg, #900052 0%, #ba1d4a 99%);
 		}
-    }
+	}
 }
 </style>

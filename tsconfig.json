@@ -1,16 +1,26 @@
 {
 	"compilerOptions": {
 		"target": "esnext",
-		"useDefineForClassFields": true,
 		"module": "esnext",
 		"moduleResolution": "node",
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true,
+		"skipLibCheck": true,
 		"strict": true,
+		"importHelpers": true,
 		"jsx": "preserve",
 		"sourceMap": true,
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
-		"isolatedModules": true,
-		"lib": ["esnext", "dom"]
+		"isolatedModules": false,
+		"types": ["node"],
+		"lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["src/*"],
+			"@Request/*": ["src/request/*"],
+			"@Assets/*": ["src/assets/*"]
+		}
 	},
 	"include": [
 		"src/**/*.ts",

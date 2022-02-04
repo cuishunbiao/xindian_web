@@ -2,7 +2,6 @@
 	"editor.formatOnType": true,
 	"editor.formatOnSave": true,
 	// Use prettier to format typescript, javascript and JSON files
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"[typescript]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
@@ -10,6 +9,9 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[vue]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	}
 }
