@@ -5,7 +5,7 @@
         <div class="step_box_content_flex border borderBottom">
             <div class="step_box_left">是否完成签署</div>
             <div class="step_box_right step_box_right_button">
-                <div class="icon_boolean" :class="{'true': stepOne.is_yuanfang_fangan}" @click="isBooleanFn('is_yuanfang_fangan', stepOne.is_yuanfang_fangan)"></div>
+                <div class="icon_boolean" :class="{'true': stepData.az_conx_3_qianshu}" @click="isBooleanFn('az_conx_3_qianshu', stepData.az_conx_3_qianshu)"></div>
             </div>
         </div>
         <div class="step_box_content_flex border borderBottom">
@@ -14,25 +14,18 @@
                 <div ref="shanghuiTime" id="shanghuiTime" class="select-tab-bg">请选择时间</div>
             </div>
         </div>
-        <div class="step_box_content_flex">
-            <div class="step_box_left step_box_left_label">结果</div>
-            <div class="step_box_right">
-                <select class="step_box_right_select" name="" id="">
-                    <option value="-1">请选择结果</option>
-                    <option value="红方">电话</option>
-                    <option value="红方">短信</option>
-                </select>
-            </div>
-        </div>
     </div>
     <div class="step_box_content">
         <div class="step_box_content_flex border borderBottom">
             <div class="step_box_left">是否开票付款</div>
+            <div class="step_box_right step_box_right_button">
+                <div class="icon_boolean" :class="{'true': stepData.az_conx_3_kaipiao}" @click="isBooleanFn('az_conx_3_kaipiao', stepData.az_conx_3_kaipiao)"></div>
+            </div>
         </div>
         <div class="step_box_content_flex border borderBottom">
             <div class="step_box_left step_box_left_label">金额</div>
             <div class="step_box_right">
-                <input type="text" placeholder="请输入金额">
+                <input type="text" v-model="stepData.az_conx_3_kaipiao_jine" placeholder="请输入金额">
             </div>
         </div>
     </div>
@@ -47,21 +40,31 @@
 import { ref, onMounted, reactive } from "vue"
 import { MONTHNUM, YEARNUM, DAYNUM, HOUR, MINUTER } from "../../../assets/ts/common";
 const shanghuiTime = ref<HTMLElement | null>(null)
+// az_3_qianshu
+// az_3_qianshu_shijian
+// az_3_kaipiao
+// az_3_kaipiao_jine   
+// conx_3_qianshu      
+// conx_3_qianshu_shijian
+// conx_3_kaipiao      
+// conx_3_kaipiao_jine 
 //声明类型
-interface stepOneTS {
-    is_yuanfang_fangan: Boolean;
-    is_xiangxi_fangan: Boolean;
-    is_fangan: Boolean;
+interface stepDataTS {
+    az_conx_3_qianshu: Boolean;
+    az_conx_3_qianshu_shijian: String;
+    az_conx_3_kaipiao: Boolean;
+    az_conx_3_kaipiao_jine: String;
 }
 //声明类型值
-type stepOneType = 'is_yuanfang_fangan' | 'is_xiangxi_fangan' | 'is_fangan'
-const stepOne = reactive<stepOneTS>({
-    is_yuanfang_fangan: false,
-    is_xiangxi_fangan: false,
-    is_fangan: false
+type stepDataType = 'az_conx_3_qianshu' | 'az_conx_3_kaipiao'
+const stepData = reactive<stepDataTS>({
+    az_conx_3_qianshu: false,
+    az_conx_3_qianshu_shijian: '',
+    az_conx_3_kaipiao: false,
+    az_conx_3_kaipiao_jine: '',
 })
-const isBooleanFn = (type: stepOneType, bool: Boolean) => {
-    stepOne[type] = !bool
+const isBooleanFn = (type: stepDataType, bool: Boolean) => {
+    stepData[type] = !bool
 }
 //选择时间
 const selectTimeFn = () => {
