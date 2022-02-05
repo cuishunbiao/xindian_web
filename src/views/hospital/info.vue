@@ -19,7 +19,7 @@
 					<p>阶段3</p>
 				</div>
 			</li>
-			<li @click="goStepFn(4)" :class="{ on: currentIndex >= 4 }">
+			<li v-if="type != '1'" @click="goStepFn(4)" :class="{ on: currentIndex >= 4 }">
 				<div class="info_tabs_content">
 					<span></span>
 					<p>阶段4</p>
@@ -38,35 +38,62 @@ import { useRoute, useRouter } from 'vue-router'
 const router = useRouter()
 const route = useRoute()
 const currentIndex = ref(1)
+const { type } = route.query
+
+//判断当前医院在第几步
+// getStepApi({
+// 	hospital_id: route.query.hospital_id
+// }).then((res: any) => {
+// 	if (res.status === 1) {
+// 		currentIndex.value = Number(res.data.step) + 1
+// 		//选择页面
+// 		selectStepFn(route.path)
+// 	} else {
+// 		errorFn(res.msg)
+// 	}
+// })
+
+const selectStepFn = (path: String) => {
+	switch (path) {
+		case '/info/step1':
+			currentIndex.value = 1
+			break
+		case '/info/step2':
+			currentIndex.value = 2
+			break
+		case '/info/step3':
+			currentIndex.value = 3
+			break
+		case '/info/step4':
+			currentIndex.value = 4
+			break
+		default:
+			currentIndex.value = 1
+			return
+	}
+}
+selectStepFn(route.path)
 
 watch(
 	() => route.path,
 	(path) => {
-		switch (path) {
-			case '/info/step1':
-				currentIndex.value = 1
-				break
-			case '/info/step2':
-				currentIndex.value = 2
-				break
-			case '/info/step3':
-				currentIndex.value = 3
-				break
-			case '/info/step4':
-				currentIndex.value = 4
-				break
-			default:
-				currentIndex.value = 1
-				return
-		}
-		console.log(path, '监听到变化')
+		selectStepFn(path)
 	}
 )
 
 const goStepFn = (stepNumber: Number) => {
+	console.log(Number(route.query.step), stepNumber)
+	// if (Number(route.query.step) <= stepNumber) return
+	let type = ''
+	if (stepNumber === 1) {
+		type = `_${route.query.type}`
+	}
 	router.push({
-		path: `/info/step${stepNumber}`,
-		query: route.query
+		path: `/info/step${stepNumber}${type}`,
+		query: {
+			...route.query,
+			step: Number(stepNumber)
+		}
 	})
 }
 </script>

@@ -40,6 +40,7 @@ h2 {
 .step_box_content_flex {
 	clear: both;
 	display: flex;
+	font-weight: normal;
 	.step_box_left {
 		flex: 1;
 		padding: 0.3rem 0;
@@ -51,6 +52,9 @@ h2 {
 	}
 	.step_box_right {
 		padding: 0.3rem 0;
+		position: relative;
+		z-index: 1;
+		font-weight: normal;
 		input {
 			text-align: right;
 			height: 0.7rem;
@@ -102,6 +106,21 @@ h2 {
 		direction: rtl;
 	}
 }
+
+.step_box_false_bg {
+	position: relative;
+}
+.step_box_false_bg::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: transparent;
+	z-index: 2;
+}
+
 .step_box_false::before {
 	background-color: #999;
 }

@@ -5,12 +5,9 @@
 				<input v-model="hospital_name" type="text" placeholder="请输入医院名称" />
 			</div>
 			<div class="hospital_list">
-				<router-link
-					v-for="(item, index) in hospitalLists"
-					:key="index"
-					:to="{ path: '/info/step1', query: { hospital_id: item.id } }"
-					>{{ item.name }}</router-link
-				>
+				<li v-for="(item, index) in hospitalLists" :key="index" @click="toStepPageFn(item)">
+					{{ item.name }}
+				</li>
 			</div>
 		</div>
 	</div>
@@ -21,8 +18,9 @@ import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { getHospitalApi } from '@Request/api'
 import { errorFn } from '@Assets/ts/common'
-
-const { city } = useRoute().query
+import router from '@/router'
+const route = useRoute()
+const { city, type } = route.query
 const hospitalLists = ref<any[]>([])
 const hospital_name = ref('')
 
@@ -40,6 +38,40 @@ const getHospitalFn = () => {
 	})
 }
 getHospitalFn()
+
+const toStepPageFn = (item: any) => {
+	/**
+	 * step  是联盟当前阶段
+	 * az_step  是红方当前阶段
+	 * conx_step 是 conx 当前步骤
+	 *
+	 * type = 1 红方
+	 * type = 2 联盟
+	 * type = 3 CONX
+	 */
+	//根据 type 判断走哪个页面
+	let stepNumber = 1
+	if (type === '1') {
+		stepNumber += Number(item.az_step)
+	} else if (type === '2') {
+		stepNumber += Number(item.step)
+	} else if (type === '3') {
+		stepNumber += Number(item.conx_step)
+	}
+	let routeType = ''
+	if (stepNumber === 1) {
+		routeType = `_${route.query.type}`
+	}
+	router.push({
+		path: `/info/step${stepNumber}${routeType}`,
+		query: {
+			type,
+			hospital_id: item.id,
+			step: stepNumber,
+			city
+		}
+	})
+}
 
 watch(
 	() => hospital_name.value,
@@ -75,7 +107,7 @@ watch(
 	}
 	.hospital_list {
 		margin-top: 0.32rem;
-		a {
+		li {
 			display: block;
 			padding: 0.27rem 0.8rem 0.27rem 0.44rem;
 			background: #ffffff;

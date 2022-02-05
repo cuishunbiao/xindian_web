@@ -36,10 +36,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { getSearchApi } from '@Request/api'
 import { errorFn } from '@Assets/ts/common'
 const router = useRouter()
+const route = useRoute()
 
 const provinceIndex = ref('')
 const provinceData = ref<any[]>([])
@@ -65,7 +66,8 @@ const submitFn = () => {
 	router.push({
 		path: '/hospital',
 		query: {
-			city: city.value
+			city: city.value,
+			type: route.query.type
 		}
 	})
 }

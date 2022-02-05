@@ -1,6 +1,6 @@
 <template>
 	<h2>阶段1</h2>
-	<div v-if="type === '2'" class="step_box">
+	<div class="step_box">
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">是否已通知医院</div>
@@ -71,16 +71,12 @@
 		</div>
 	</div>
 	<!-- AZ -->
-	<div v-if="type === '1' || type === '2'" ref="stepBoxAZ" class="step_box mt35">
+	<div class="step_box step_box_false mt35">
 		<div class="step_box_content">
 			<div class="step_box_content_flex">
 				<div class="step_box_left">是否已给院方初步介绍方案</div>
 				<div class="step_box_right step_box_right_button">
-					<div
-						class="icon_boolean"
-						:class="{ true: az_1_fangan === '是' }"
-						@click="isBooleanFn('az_1_fangan', az_1_fangan)"
-					></div>
+					<div class="icon_boolean" :class="{ true: az_1_fangan === '是' }"></div>
 				</div>
 			</div>
 		</div>
@@ -90,37 +86,29 @@
 			</div>
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left step_box_left_label">姓名</div>
-				<div class="step_box_right">
-					<input type="text" v-model="stepData.az_1_yuanfang_name" placeholder="请输入姓名" />
-				</div>
+				<div class="step_box_right">{{ stepData.az_1_yuanfang_name }}</div>
 			</div>
 			<div class="step_box_content_flex">
 				<div class="step_box_left step_box_left_label">职位</div>
-				<div class="step_box_right">
-					<input type="text" v-model="stepData.az_1_yuanfang_zhiwei" placeholder="请输入职位" />
-				</div>
+				<div class="step_box_right">{{ stepData.az_1_yuanfang_zhiwei }}</div>
 			</div>
 		</div>
 		<div class="step_box_content paddingB30">
 			<div class="step_box_content_flex">
 				<div class="step_box_left">院方反馈</div>
 			</div>
-			<div class="step_box_content_flex border borderAll">
-				<textarea cols="30" rows="5" v-model="az_1_yuanfang_fankui" placeholder="请输入院方反馈"></textarea>
+			<div class="step_box_content_flex">
+				{{ az_1_yuanfang_fankui }}
 			</div>
 		</div>
 	</div>
 	<!-- AZ 和 CONX -->
-	<div ref="stepBoxCONX" class="step_box mt35">
+	<div class="step_box step_box_false mt35">
 		<div class="step_box_content">
 			<div class="step_box_content_flex">
 				<div class="step_box_left">是否已对接院方详细介绍方案</div>
 				<div class="step_box_right step_box_right_button">
-					<div
-						class="icon_boolean"
-						:class="{ true: az_conx_1_xiangxi_fangan === '是' }"
-						@click="isBooleanFn('az_conx_1_xiangxi_fangan', az_conx_1_xiangxi_fangan)"
-					></div>
+					<div class="icon_boolean" :class="{ true: az_conx_1_xiangxi_fangan === '是' }"></div>
 				</div>
 			</div>
 		</div>
@@ -128,19 +116,13 @@
 			<div class="step_box_content_flex">
 				<div class="step_box_left">院方反馈（尽可能详述）</div>
 			</div>
-			<div class="step_box_content_flex border borderAll">
-				<textarea cols="30" rows="5" v-model="az_conx_1_xiangxi_fankui" placeholder="请输入院方反馈"></textarea>
-			</div>
+			<div class="step_box_content_flex">{{ az_conx_1_xiangxi_fankui }}</div>
 		</div>
 		<div class="step_box_content">
 			<div class="step_box_content_flex">
 				<div class="step_box_left">是否已确认方案</div>
 				<div class="step_box_right step_box_right_button">
-					<div
-						class="icon_boolean"
-						:class="{ true: az_conx_1_xiangxi_queren === '是' }"
-						@click="isBooleanFn('az_conx_1_xiangxi_queren', az_conx_1_xiangxi_queren)"
-					></div>
+					<div class="icon_boolean" :class="{ true: az_conx_1_xiangxi_queren === '是' }"></div>
 				</div>
 			</div>
 		</div>
@@ -153,14 +135,12 @@
 <script setup lang="ts">
 import { ref, onMounted, reactive, toRefs } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { postEditStepApi, getIsLoginApi, getStepApi } from '@Request/api'
+import { postEditStepApi, getStepApi } from '@Request/api'
 import { MONTHNUM, YEARNUM, DAYNUM, HOUR, MINUTER, errorFn } from '@Assets/ts/common'
 const tongzhiTime = ref<HTMLElement | null>(null)
 const route = useRoute()
 const { hospital_id, step, type } = route.query
 const router = useRouter()
-const stepBoxAZ = ref<HTMLElement | null>(null)
-const stepBoxCONX = ref<HTMLElement | null>(null)
 
 //声明类型
 interface stepDataTS {
@@ -181,9 +161,6 @@ interface stepDataTS {
 	conx_1_xiangxi_fangan: String
 	conx_1_xiangxi_fankui: String
 	conx_1_xiangxi_queren: String
-	az_conx_1_xiangxi_fangan: String
-	az_conx_1_xiangxi_fankui: any
-	az_conx_1_xiangxi_queren: String
 }
 //声明类型值
 type stepDataType =
@@ -193,8 +170,6 @@ type stepDataType =
 	| 'az_1_xiangxi_fangan'
 	| 'az_1_xiangxi_queren'
 	| 'conx_1_xiangxi_fangan'
-	| 'az_conx_1_xiangxi_queren'
-	| 'az_conx_1_xiangxi_fangan'
 let stepData = reactive<stepDataTS>({
 	lianmeng_1_tz_status: '否',
 	lianmeng_1_tz_type: '',
@@ -212,10 +187,7 @@ let stepData = reactive<stepDataTS>({
 	az_1_xiangxi_queren: '否',
 	conx_1_xiangxi_fangan: '否',
 	conx_1_xiangxi_fankui: '',
-	conx_1_xiangxi_queren: '',
-	az_conx_1_xiangxi_fangan: '否',
-	az_conx_1_xiangxi_fankui: '',
-	az_conx_1_xiangxi_queren: '否'
+	conx_1_xiangxi_queren: ''
 })
 const isBooleanFn = (type: stepDataType, bool: Boolean) => {
 	stepData[type] === '是' ? (stepData[type] = '否') : (stepData[type] = '是')
@@ -236,13 +208,14 @@ const selectTimeFn = () => {
 		wheels: [{ data: YEARNUM }, { data: MONTHNUM }, { data: DAYNUM }, { data: HOUR }, { data: MINUTER }],
 		position: [year, month, date, hour, minuter],
 		callback: function (indexArr: Number, data: any) {
+			if (!tongzhiTime.value) return
 			const time = `${data[0]}-${data[1]}-${data[2]} ${data[3]}:${data[4]}`
 			stepData.lianmeng_1_tz_time = time
 		}
 	})
 }
 
-//获取信息
+//判断当前医院在第几步
 getStepApi({
 	hospital_id
 }).then((res: any) => {
@@ -252,25 +225,6 @@ getStepApi({
 		errorFn(res.msg)
 	}
 })
-
-//获取登录状态
-// getIsLoginApi().then((res: any) => {
-// 	debugger
-// 	console.log(res)
-// })
-
-//根据类型判断模块显示多少
-const showBoxFn = () => {
-	//如果是联盟，AZ和CONX 只能看，不能写
-	if (type === '2') {
-		if (stepBoxAZ.value) {
-			stepBoxAZ.value.className = 'step_box mt35 step_box_false'
-		}
-		if (stepBoxCONX.value) {
-			stepBoxCONX.value.className = 'step_box mt35 step_box_false'
-		}
-	}
-}
 
 //提交数据
 const submitFn = () => {
@@ -285,33 +239,20 @@ const submitFn = () => {
 			router.push({
 				path: `/info/step2`,
 				query: {
-					type,
-					hospital_id,
+					...route.query,
 					step: Number(step) + 1
 				}
 			})
-			//provinceData.value = res.data.search
 		} else {
 			errorFn(res.msg)
 		}
 	})
 }
 onMounted(() => {
-	//根据 type 来判断显示页面
-	showBoxFn()
 	selectTimeFn()
 })
 // 解构
-const {
-	lianmeng_1_tz_status,
-	lianmeng_1_baoming,
-	lianmeng_1_yuanfang_fankui,
-	az_1_yuanfang_fankui,
-	az_conx_1_xiangxi_fankui,
-	az_conx_1_xiangxi_queren,
-	az_conx_1_xiangxi_fangan,
-	az_1_fangan
-} = {
+const { lianmeng_1_tz_status, lianmeng_1_baoming, lianmeng_1_yuanfang_fankui, az_1_yuanfang_fankui, az_1_fangan } = {
 	...toRefs(stepData)
 }
 </script>

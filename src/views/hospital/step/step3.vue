@@ -1,53 +1,108 @@
 <template>
-	<h2>阶段3</h2>
-	<div class="step_box">
-		<div class="step_box_content">
-			<div class="step_box_content_flex border borderBottom">
-				<div class="step_box_left">是否完成签署</div>
-				<div class="step_box_right step_box_right_button">
-					<div
-						class="icon_boolean"
-						:class="{ true: stepData.az_conx_3_qianshu }"
-						@click="isBooleanFn('az_conx_3_qianshu', stepData.az_conx_3_qianshu)"
-					></div>
+	<div v-if="type === '1' || type === '2'">
+		<h2>红方 - 阶段3</h2>
+		<div ref="stepBoxAZ" class="step_box">
+			<div class="step_box_content">
+				<div class="step_box_content_flex border borderBottom">
+					<div class="step_box_left">是否完成签署</div>
+					<div class="step_box_right step_box_right_button">
+						<div
+							class="icon_boolean"
+							:class="{ true: stepData.az_3_qianshu === '是' }"
+							@click="isBooleanFn('az_3_qianshu', stepData.az_3_qianshu)"
+						></div>
+					</div>
+				</div>
+				<div class="step_box_content_flex border borderBottom">
+					<div class="step_box_left step_box_left_label">时间</div>
+					<div class="step_box_right">
+						<div ref="qianshu1Time" id="qianshu1Time" class="select-tab-bg">
+							{{ stepData.az_3_qianshu_shijian }}
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="step_box_content_flex border borderBottom">
-				<div class="step_box_left step_box_left_label">时间</div>
-				<div class="step_box_right">
-					<div ref="shanghuiTime" id="shanghuiTime" class="select-tab-bg">请选择时间</div>
+			<div class="step_box_content">
+				<div class="step_box_content_flex border borderBottom">
+					<div class="step_box_left">是否开票付款</div>
+					<div class="step_box_right step_box_right_button">
+						<div
+							class="icon_boolean"
+							:class="{ true: stepData.az_3_kaipiao === '是' }"
+							@click="isBooleanFn('az_3_kaipiao', stepData.az_3_kaipiao)"
+						></div>
+					</div>
 				</div>
-			</div>
-		</div>
-		<div class="step_box_content">
-			<div class="step_box_content_flex border borderBottom">
-				<div class="step_box_left">是否开票付款</div>
-				<div class="step_box_right step_box_right_button">
-					<div
-						class="icon_boolean"
-						:class="{ true: stepData.az_conx_3_kaipiao }"
-						@click="isBooleanFn('az_conx_3_kaipiao', stepData.az_conx_3_kaipiao)"
-					></div>
-				</div>
-			</div>
-			<div class="step_box_content_flex border borderBottom">
-				<div class="step_box_left step_box_left_label">金额</div>
-				<div class="step_box_right">
-					<input type="text" v-model="stepData.az_conx_3_kaipiao_jine" placeholder="请输入金额" />
+				<div class="step_box_content_flex border borderBottom">
+					<div class="step_box_left step_box_left_label">金额</div>
+					<div class="step_box_right">
+						<input type="text" v-model="stepData.az_3_kaipiao_jine" placeholder="请输入金额" />
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	<div v-if="type === '3' || type === '2'">
+		<h2>康乃心 - 阶段3</h2>
+		<div ref="stepBoxCONX" class="step_box">
+			<div class="step_box_content">
+				<div class="step_box_content_flex border borderBottom">
+					<div class="step_box_left">是否完成签署</div>
+					<div class="step_box_right step_box_right_button">
+						<div
+							class="icon_boolean"
+							:class="{ true: stepData.conx_3_qianshu === '是' }"
+							@click="isBooleanFn('conx_3_qianshu', stepData.conx_3_qianshu)"
+						></div>
+					</div>
+				</div>
+				<div class="step_box_content_flex border borderBottom">
+					<div class="step_box_left step_box_left_label">时间</div>
+					<div class="step_box_right">
+						<div ref="qianshu2Time" id="qianshu2Time" class="select-tab-bg">
+							{{ stepData.conx_3_qianshu_shijian }}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="step_box_content">
+				<div class="step_box_content_flex border borderBottom">
+					<div class="step_box_left">是否开票付款</div>
+					<div class="step_box_right step_box_right_button">
+						<div
+							class="icon_boolean"
+							:class="{ true: stepData.conx_3_kaipiao === '是' }"
+							@click="isBooleanFn('conx_3_kaipiao', stepData.conx_3_kaipiao)"
+						></div>
+					</div>
+				</div>
+				<div class="step_box_content_flex border borderBottom">
+					<div class="step_box_left step_box_left_label">金额</div>
+					<div class="step_box_right">
+						<input type="text" v-model="stepData.conx_3_kaipiao_jine" placeholder="请输入金额" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="info_footer">
-		<button class="info_submit">下一步阶段4</button>
+		<button class="info_submit" @click="submitFn()">{{ type === '1' ? '完成' : '下一步阶段4' }}</button>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, reactive } from 'vue'
-import { MONTHNUM, YEARNUM, DAYNUM, HOUR, MINUTER } from '../../../assets/ts/common'
-const shanghuiTime = ref<HTMLElement | null>(null)
+import { useRoute, useRouter } from 'vue-router'
+import { MONTHNUM, YEARNUM, DAYNUM, HOUR, MINUTER, errorFn } from '../../../assets/ts/common'
+import { getStepApi, postEditStepApi } from '@Request/api'
+const qianshu1Time = ref<HTMLElement | null>(null)
+const qianshu2Time = ref<HTMLElement | null>(null)
+const router = useRouter()
+const route = useRoute()
+const { type, hospital_id, step, city } = route.query
+const stepBoxAZ = ref<HTMLElement | null>(null)
+const stepBoxCONX = ref<HTMLElement | null>(null)
+
 // az_3_qianshu
 // az_3_qianshu_shijian
 // az_3_kaipiao
@@ -58,22 +113,32 @@ const shanghuiTime = ref<HTMLElement | null>(null)
 // conx_3_kaipiao_jine
 //声明类型
 interface stepDataTS {
-	az_conx_3_qianshu: Boolean
-	az_conx_3_qianshu_shijian: String
-	az_conx_3_kaipiao: Boolean
-	az_conx_3_kaipiao_jine: String
+	az_3_qianshu: String
+	az_3_qianshu_shijian: String
+	az_3_kaipiao: String
+	az_3_kaipiao_jine: String
+	conx_3_qianshu: String
+	conx_3_qianshu_shijian: String
+	conx_3_kaipiao: String
+	conx_3_kaipiao_jine: String
 }
 //声明类型值
-type stepDataType = 'az_conx_3_qianshu' | 'az_conx_3_kaipiao'
-const stepData = reactive<stepDataTS>({
-	az_conx_3_qianshu: false,
-	az_conx_3_qianshu_shijian: '',
-	az_conx_3_kaipiao: false,
-	az_conx_3_kaipiao_jine: ''
+type stepDataType = 'az_3_qianshu' | 'az_3_kaipiao' | 'conx_3_qianshu' | 'conx_3_kaipiao'
+let stepData = reactive<stepDataTS>({
+	az_3_qianshu: '否',
+	az_3_qianshu_shijian: '请选择时间',
+	az_3_kaipiao: '否',
+	az_3_kaipiao_jine: '',
+	conx_3_qianshu: '否',
+	conx_3_qianshu_shijian: '请选择时间',
+	conx_3_kaipiao: '否',
+	conx_3_kaipiao_jine: ''
 })
+
 const isBooleanFn = (type: stepDataType, bool: Boolean) => {
-	stepData[type] = !bool
+	stepData[type] === '是' ? (stepData[type] = '否') : (stepData[type] = '是')
 }
+
 //选择时间
 const selectTimeFn = () => {
 	let myDate = new Date()
@@ -84,19 +149,88 @@ const selectTimeFn = () => {
 	let minuter = myDate.getMinutes()
 	//选择开始时间
 	new MobileSelect({
-		trigger: '#shanghuiTime',
+		trigger: type === '1' ? '#qianshu1Time' : '#qianshu2Time',
 		selectType: 'ymdhm',
 		selectCla: 'start',
 		wheels: [{ data: YEARNUM }, { data: MONTHNUM }, { data: DAYNUM }, { data: HOUR }, { data: MINUTER }],
 		position: [year, month, date, hour, minuter],
 		callback: function (indexArr: Number, data: any) {
-			if (!shanghuiTime.value) return
-			shanghuiTime.value.innerHTML = `${data[0]}-${data[1]}-${data[2]} ${data[3]}:${data[4]}`
+			const time = `${data[0]}-${data[1]}-${data[2]} ${data[3]}:${data[4]}`
+			type === '1' ? (stepData.az_3_qianshu_shijian = time) : (stepData.conx_3_qianshu_shijian = time)
+		}
+	})
+}
+
+//获取信息
+getStepApi({
+	hospital_id
+}).then((res: any) => {
+	if (res.status === 1) {
+		stepData = Object.assign(stepData, res.data.step_info[Number(step)])
+	} else {
+		errorFn(res.msg)
+	}
+})
+
+//根据类型判断模块显示多少
+const showBoxFn = () => {
+	//如果是联盟，AZ和CONX 只能看，不能写
+	if (type === '2') {
+		if (stepBoxAZ.value) {
+			stepBoxAZ.value.className = 'step_box step_box_false step_box_false_bg'
+		}
+		if (stepBoxCONX.value) {
+			stepBoxCONX.value.className = 'step_box step_box_false step_box_false_bg'
+		}
+	}
+}
+
+//提交数据
+const submitFn = () => {
+	if (type === '2') {
+		router.push({
+			path: `/info/step4`,
+			query: {
+				...route.query,
+				step: Number(step) + 1
+			}
+		})
+		return
+	}
+	//根据当前页面来判断是哪个阶段
+	postEditStepApi({
+		step,
+		hospital_id,
+		...stepData
+	}).then((res: any) => {
+		if (res.status === 1) {
+			errorFn(res.msg)
+			if (type === '1') {
+				router.push({
+					path: `/hospital`,
+					query: {
+						type,
+						city
+					}
+				})
+				return
+			}
+			router.push({
+				path: `/info/step4`,
+				query: {
+					...route.query,
+					step: Number(step) + 1
+				}
+			})
+		} else {
+			errorFn(res.msg)
 		}
 	})
 }
 
 onMounted(() => {
+	showBoxFn()
+	if (type === '2') return
 	selectTimeFn()
 })
 </script>

@@ -1,12 +1,10 @@
 import axios, { AxiosResponse } from 'axios'
+import qs from 'qs'
 
-const LOGIN_EXPIRED = 900401 // 账号过期
+const LOGIN_EXPIRED = 1001 // 账号过期
 const CODE_SUCCESS = 200
 const instance = axios.create({
-	timeout: 20000,
-	headers: {
-		'Content-Type': 'application/json; charset=UTF-8'
-	}
+	timeout: 20000
 })
 
 // 请求拦截器
@@ -47,7 +45,7 @@ const getRequest = (url: string, params?: any) =>
 // Post请求
 const postRequest = (url: string, params?: any, config?: any) =>
 	instance
-		.post(`${url}`, params, config)
+		.post(`${url}`, qs.stringify(params), config)
 		.then((res) => res)
 		.catch((error) => error)
 
