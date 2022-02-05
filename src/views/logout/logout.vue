@@ -27,6 +27,11 @@ const logoutFn = () => {
 .logout {
 	background-size: 100% 100%;
 	text-align: center;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-self: center;
 	.logout_submit {
 		width: 8rem;
 		margin: 0.33rem auto 0 auto;

@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
-const path = require('path')
 import vue from '@vitejs/plugin-vue'
+const path = require('path')
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -27,5 +27,8 @@ export default defineConfig({
 				rewrite: (path) => path.replace(/^\/api/, '')
 			}
 		}
+	},
+	build: {
+		outDir: '/Users/cuishunbiao/study/xindian/xindianyzw'
 	}
 })

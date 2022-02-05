@@ -1,6 +1,6 @@
 <template>
 	<h2>阶段2</h2>
-	<div v-if="type === '1' || type === '2'" ref="stepBoxAZ" class="step_box">
+	<div v-show="type === '1' || type === '2'" ref="stepBoxAZ" class="step_box">
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">是否已临床提单</div>
@@ -63,7 +63,7 @@
 	<!-- CONX -->
 	<div
 		ref="stepBoxCONX"
-		v-if="(type === '3' && stepData.az_2_zhaobiao === '是') || type === '2'"
+		v-show="(type === '3' && stepData.az_2_zhaobiao === '是') || type === '2'"
 		class="step_box mt35"
 	>
 		<div class="step_box_content">

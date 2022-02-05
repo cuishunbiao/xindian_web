@@ -1,6 +1,6 @@
 import { getRequest, postRequest } from './request'
 
-const BaseUrl = '/api/index.php'
+const BaseUrl = process.env.NODE_ENV === 'production' ? '/index.php' : '/api/index.php'
 
 //获取 Type 类型
 const getTypeApi = (params?: any, config?: any) => getRequest(`${BaseUrl}/User/do_get_type`, params)

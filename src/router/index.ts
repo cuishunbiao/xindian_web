@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const Login = () => import('@/views/login/login.vue')
 const Logout = () => import('@/views/logout/logout.vue')
@@ -76,6 +76,6 @@ const routes = [
 ]
 
 export default createRouter({
-	history: createWebHistory(),
+	history: createWebHashHistory(),
 	routes
 })
