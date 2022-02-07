@@ -20,7 +20,7 @@
 			</div>
 			<div class="step_box_content_flex">
 				<div class="step_box_left step_box_left_label">时间</div>
-				<div class="step_box_right">
+				<div class="step_box_right width80">
 					<div ref="tongzhiTime" id="tongzhiTime" class="select-tab-bg">
 						{{ stepData.lianmeng_1_tz_time }}
 					</div>

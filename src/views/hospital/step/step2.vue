@@ -34,7 +34,7 @@
 			</div>
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left step_box_left_label">时间</div>
-				<div class="step_box_right">
+				<div class="step_box_right width80">
 					<div ref="shanghuiTime" id="shanghuiTime" class="select-tab-bg">
 						{{ stepData.az_2_shanghui_time }}
 					</div>
@@ -84,7 +84,7 @@
 			</div>
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left step_box_left_label">时间</div>
-				<div class="step_box_right">
+				<div class="step_box_right width80">
 					<div ref="zhaobiaoTime" id="zhaobiaoTime" class="select-tab-bg">
 						{{ stepData.conx_2_zhaobiao_shijian }}
 					</div>
@@ -99,6 +99,7 @@
 		</div>
 	</div>
 	<div class="info_footer">
+		<button class="info_back" @click="backFn()">返回医院列表</button>
 		<button class="info_submit" @click="submitFn">下一步阶段3</button>
 	</div>
 </template>
@@ -111,9 +112,19 @@ import { getStepApi, postEditStepApi } from '@Request/api'
 const shanghuiTime = ref<HTMLElement | null>(null)
 const router = useRouter()
 const route = useRoute()
-const { type, hospital_id, step } = route.query
+const { type, hospital_id, step, city } = route.query
 const stepBoxAZ = ref<HTMLElement | null>(null)
 const stepBoxCONX = ref<HTMLElement | null>(null)
+
+const backFn = () => {
+	router.push({
+		path: `/hospital`,
+		query: {
+			type,
+			city
+		}
+	})
+}
 
 //声明类型
 interface stepDataTS {
@@ -202,6 +213,13 @@ const submitFn = () => {
 		return
 	}
 	//根据当前页面来判断是哪个阶段
+	if (stepData.az_2_shanghui_time === '请选择时间') {
+		stepData.az_2_shanghui_time = ''
+	}
+	if (stepData.conx_2_zhaobiao_shijian === '请选择时间') {
+		stepData.conx_2_zhaobiao_shijian = ''
+	}
+
 	postEditStepApi({
 		step,
 		hospital_id,

@@ -15,7 +15,7 @@
 				</div>
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left step_box_left_label">时间</div>
-					<div class="step_box_right">
+					<div class="step_box_right width80">
 						<div ref="qianshu1Time" id="qianshu1Time" class="select-tab-bg">
 							{{ stepData.az_3_qianshu_shijian }}
 						</div>
@@ -36,7 +36,7 @@
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left step_box_left_label">金额</div>
 					<div class="step_box_right">
-						<input type="text" v-model="stepData.az_3_kaipiao_jine" placeholder="请输入金额" />
+						<input type="number" v-model="stepData.az_3_kaipiao_jine" placeholder="请输入金额" />
 					</div>
 				</div>
 			</div>
@@ -58,7 +58,7 @@
 				</div>
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left step_box_left_label">时间</div>
-					<div class="step_box_right">
+					<div class="step_box_right width80">
 						<div ref="qianshu2Time" id="qianshu2Time" class="select-tab-bg">
 							{{ stepData.conx_3_qianshu_shijian }}
 						</div>
@@ -79,14 +79,17 @@
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left step_box_left_label">金额</div>
 					<div class="step_box_right">
-						<input type="text" v-model="stepData.conx_3_kaipiao_jine" placeholder="请输入金额" />
+						<input type="number" v-model="stepData.conx_3_kaipiao_jine" placeholder="请输入金额" />
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="info_footer">
-		<button class="info_submit" @click="submitFn()">{{ type === '1' ? '完成' : '下一步阶段4' }}</button>
+		<button class="info_back" v-if="type !== '1'" @click="backFn()">返回医院列表</button>
+		<button class="info_submit" :class="{ width80: type === '1' }" @click="submitFn()">
+			{{ type === '1' ? '完成' : '下一步阶段4' }}
+		</button>
 	</div>
 </template>
 
@@ -102,6 +105,16 @@ const route = useRoute()
 const { type, hospital_id, step, city } = route.query
 const stepBoxAZ = ref<HTMLElement | null>(null)
 const stepBoxCONX = ref<HTMLElement | null>(null)
+
+const backFn = () => {
+	router.push({
+		path: `/hospital`,
+		query: {
+			type,
+			city
+		}
+	})
+}
 
 // az_3_qianshu
 // az_3_qianshu_shijian
@@ -198,6 +211,13 @@ const submitFn = () => {
 		return
 	}
 	//根据当前页面来判断是哪个阶段
+	if (stepData.az_3_qianshu_shijian === '请选择时间') {
+		stepData.az_3_qianshu_shijian = ''
+	}
+	if (stepData.conx_3_qianshu_shijian === '请选择时间') {
+		stepData.conx_3_qianshu_shijian = ''
+	}
+
 	postEditStepApi({
 		step,
 		hospital_id,

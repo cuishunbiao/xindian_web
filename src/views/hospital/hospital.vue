@@ -10,6 +10,11 @@
 				</li>
 			</div>
 		</div>
+		<div class="info_footer">
+			<button class="info_submit width80" style="width: 8rem; margin-left: 0" @click="backAreaFn()">
+				返回选择区域页
+			</button>
+		</div>
 	</div>
 </template>
 
@@ -23,6 +28,15 @@ const route = useRoute()
 const { city, type } = route.query
 const hospitalLists = ref<any[]>([])
 const hospital_name = ref('')
+
+const backAreaFn = () => {
+	router.push({
+		path: '/province',
+		query: {
+			type
+		}
+	})
+}
 
 //获取医院
 const getHospitalFn = () => {
@@ -52,11 +66,11 @@ const toStepPageFn = (item: any) => {
 	//根据 type 判断走哪个页面
 	let stepNumber = 1
 	if (type === '1') {
-		stepNumber += Number(item.az_step)
+		stepNumber += Number(item.az_step === '3' ? 2 : item.az_step)
 	} else if (type === '2') {
-		stepNumber += Number(item.step)
+		stepNumber += Number(item.step === '4' ? 3 : item.step)
 	} else if (type === '3') {
-		stepNumber += Number(item.conx_step)
+		stepNumber += Number(item.conx_step === '4' ? 3 : item.conx_step)
 	}
 	let routeType = ''
 	if (stepNumber === 1) {
@@ -87,6 +101,7 @@ watch(
 	width: 100%;
 	min-height: 100%;
 	padding-top: 0.35rem;
+	padding-bottom: 2.4rem;
 	.hospital_content {
 		width: 92%;
 		margin: 0 auto;

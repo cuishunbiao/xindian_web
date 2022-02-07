@@ -38,7 +38,7 @@ import { useRoute, useRouter } from 'vue-router'
 const router = useRouter()
 const route = useRoute()
 const currentIndex = ref(1)
-const { type } = route.query
+const { type, city } = route.query
 
 //判断当前医院在第几步
 // getStepApi({
@@ -171,31 +171,5 @@ const goStepFn = (stepNumber: Number) => {
 .info_content {
 	width: 92%;
 	margin: 0 auto;
-}
-.info_footer {
-	height: 2.4rem;
-	position: fixed;
-	z-index: 2;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	.info_submit {
-		width: 8rem;
-		height: 1.31rem;
-		background: linear-gradient(90deg, #8e0052 0%, #e14145 99%);
-		border-radius: 0.65rem;
-		font-size: 0.4rem;
-		color: #fff;
-		transition: background 0.2s linear;
-		cursor: pointer;
-		&:hover,
-		&:focus {
-			background: linear-gradient(90deg, #900052 0%, #ba1d4a 99%);
-		}
-	}
 }
 </style>

@@ -76,6 +76,7 @@
 		</div>
 	</div>
 	<div class="info_footer">
+		<button class="info_back" @click="backFn()">返回医院列表</button>
 		<button class="info_submit" @click="submitFn">下一步阶段2</button>
 	</div>
 </template>
@@ -86,9 +87,18 @@ import { useRoute, useRouter } from 'vue-router'
 import { postEditStepApi, getStepApi } from '@Request/api'
 import { errorFn } from '@Assets/ts/common'
 const route = useRoute()
-const { hospital_id, step, type } = route.query
+const { hospital_id, step, type, city } = route.query
 const router = useRouter()
 
+const backFn = () => {
+	router.push({
+		path: `/hospital`,
+		query: {
+			type,
+			city
+		}
+	})
+}
 //声明类型
 interface stepDataTS {
 	az_1_fangan: String

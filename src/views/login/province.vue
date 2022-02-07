@@ -63,6 +63,10 @@ const provinceChangeFn = (index: any) => {
 }
 
 const submitFn = () => {
+	if (!city.value) {
+		errorFn('请选择城市')
+		return
+	}
 	router.push({
 		path: '/hospital',
 		query: {

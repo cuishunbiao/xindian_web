@@ -20,7 +20,7 @@
 			</div>
 			<div class="step_box_content_flex">
 				<div class="step_box_left step_box_left_label">时间</div>
-				<div class="step_box_right">
+				<div class="step_box_right width80">
 					<div ref="tongzhiTime" id="tongzhiTime" class="select-tab-bg">
 						{{ stepData.lianmeng_1_tz_time }}
 					</div>
@@ -128,6 +128,7 @@
 		</div>
 	</div>
 	<div class="info_footer">
+		<button class="info_back" @click="backFn()">返回医院列表</button>
 		<button class="info_submit" @click="submitFn">下一步阶段2</button>
 	</div>
 </template>
@@ -137,10 +138,21 @@ import { ref, onMounted, reactive, toRefs } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { postEditStepApi, getStepApi } from '@Request/api'
 import { MONTHNUM, YEARNUM, DAYNUM, HOUR, MINUTER, errorFn } from '@Assets/ts/common'
+import { emit } from 'process'
 const tongzhiTime = ref<HTMLElement | null>(null)
 const route = useRoute()
-const { hospital_id, step, type } = route.query
+const { hospital_id, step, type, city } = route.query
 const router = useRouter()
+
+const backFn = () => {
+	router.push({
+		path: `/hospital`,
+		query: {
+			type,
+			city
+		}
+	})
+}
 
 //声明类型
 interface stepDataTS {
@@ -229,6 +241,9 @@ getStepApi({
 //提交数据
 const submitFn = () => {
 	//根据当前页面来判断是哪个阶段
+	if (stepData.lianmeng_1_tz_time === '请选择时间') {
+		stepData.lianmeng_1_tz_time = ''
+	}
 	postEditStepApi({
 		step,
 		hospital_id,

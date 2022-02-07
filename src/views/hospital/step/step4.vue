@@ -34,7 +34,7 @@
 		</div>
 	</div>
 	<div class="info_footer">
-		<button class="info_submit" @click="submitFn()">完成</button>
+		<button class="info_submit width80" @click="submitFn()">完成</button>
 	</div>
 </template>
 
