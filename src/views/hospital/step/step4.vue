@@ -1,6 +1,6 @@
 <template>
 	<div v-if="type === '2'">
-		<h2>阶段4</h2>
+		<h2>阶段4：设备运营</h2>
 		<div class="step_box">
 			<div class="step_box_content">
 				<div class="step_box_content_flex border borderBottom">
@@ -17,7 +17,7 @@
 		</div>
 	</div>
 	<div v-if="type === '3'">
-		<h2>阶段4</h2>
+		<h2>阶段4：设备运营</h2>
 		<div class="step_box">
 			<div class="step_box_content">
 				<div class="step_box_content_flex border borderBottom">
@@ -34,7 +34,8 @@
 		</div>
 	</div>
 	<div class="info_footer">
-		<button class="info_submit width80" @click="submitFn()">完成</button>
+		<button class="info_back" @click="backFn()">上一步阶段3</button>
+		<button class="info_submit" @click="submitFn()">完成</button>
 	</div>
 </template>
 
@@ -62,6 +63,16 @@ let stepData = reactive<stepDataTS>({
 
 const isBooleanFn = (type: stepDataType, bool: Boolean) => {
 	stepData[type] === '是' ? (stepData[type] = '否') : (stepData[type] = '是')
+}
+
+const backFn = () => {
+	router.push({
+		path: `/info/step3`,
+		query: {
+			...route.query,
+			step: 3
+		}
+	})
 }
 
 //获取信息

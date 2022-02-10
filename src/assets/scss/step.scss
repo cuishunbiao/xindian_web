@@ -79,13 +79,29 @@ h2 {
 	height: 0.64rem;
 	background: url('/src/assets/images/icon_false.png') no-repeat left top;
 	background-size: 100% 100%;
+	opacity: 0.65;
+	-webkit-filter: grayscale(100%); /* Chrome, Opera */
+	-moz-filter: grayscale(100%);
+	-ms-filter: grayscale(100%);
+	filter: grayscale(100%);
 	&.true {
 		background: url('/src/assets/images/icon_true.png') no-repeat left top;
 		background-size: 100% 100%;
+		background-size: 100% 100%;
+		opacity: 1;
+		-webkit-filter: none; /* Chrome, Opera */
+		-moz-filter: none;
+		-ms-filter: none;
+		filter: none;
 	}
 	&.false {
 		background: url('/src/assets/images/icon_false.png') no-repeat left top;
 		background-size: 100% 100%;
+		opacity: 0.65;
+		-webkit-filter: grayscale(100%); /* Chrome, Opera */
+		-moz-filter: grayscale(100%);
+		-ms-filter: grayscale(100%);
+		filter: grayscale(100%);
 	}
 }
 .mt35 {

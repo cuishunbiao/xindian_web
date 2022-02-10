@@ -1,5 +1,5 @@
 <template>
-	<h2>阶段1</h2>
+	<h2>阶段1：医院接洽</h2>
 	<div class="step_box">
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
@@ -128,7 +128,7 @@
 		</div>
 	</div>
 	<div class="info_footer">
-		<button class="info_back" @click="backFn()">返回医院列表</button>
+		<button class="info_back" @click="backFn()">返回上一页</button>
 		<button class="info_submit" @click="submitFn">下一步阶段2</button>
 	</div>
 </template>

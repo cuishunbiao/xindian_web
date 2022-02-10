@@ -6,10 +6,10 @@
 		<div class="login_body_logo"><img src="/src/assets/images/logo.png" alt="心电一张网" /></div>
 		<div class="login_body_content">
 			<li>
-				<div class="content_label">所属机构</div>
+				<div class="content_label">填写方</div>
 				<div class="content_form border borderBottom">
 					<select v-model="loginData.type" @change="getAccountFn(loginData.type)">
-						<option value="-1">请选择所属机构</option>
+						<option value="-1">请选择填写方</option>
 						<option v-for="(item, index) in typeData" :key="index" :value="item.key">
 							{{ item.name }}
 						</option>

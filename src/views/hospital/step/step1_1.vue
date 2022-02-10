@@ -1,9 +1,9 @@
 <template>
-	<h2>阶段1</h2>
+	<h2>阶段1：医院接洽</h2>
 	<!-- AZ -->
 	<div class="step_box mt35">
 		<div class="step_box_content">
-			<div class="step_box_content_flex">
+			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">是否已给院方初步介绍方案</div>
 				<div class="step_box_right step_box_right_button">
 					<div
@@ -11,6 +11,14 @@
 						:class="{ true: az_1_fangan === '是' }"
 						@click="isBooleanFn('az_1_fangan', az_1_fangan)"
 					></div>
+				</div>
+			</div>
+			<div class="step_box_content_flex">
+				<div class="step_box_left step_box_left_label">时间</div>
+				<div class="step_box_right width80">
+					<div ref="shanghuiTime" id="shanghuiTime" class="select-tab-bg">
+						{{ stepData.az_2_shanghui_time }}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -44,7 +52,7 @@
 	<div class="step_box mt35" v-if="az_1_fangan === '是'">
 		<div class="step_box_content">
 			<div class="step_box_content_flex">
-				<div class="step_box_left">是否已对接院方详细介绍方案</div>
+				<div class="step_box_left">康乃心是否已对接院方详细介绍方</div>
 				<div class="step_box_right step_box_right_button">
 					<div
 						class="icon_boolean"
@@ -76,7 +84,7 @@
 		</div>
 	</div>
 	<div class="info_footer">
-		<button class="info_back" @click="backFn()">返回医院列表</button>
+		<button class="info_back" @click="backFn()">返回上一页</button>
 		<button class="info_submit" @click="submitFn">下一步阶段2</button>
 	</div>
 </template>

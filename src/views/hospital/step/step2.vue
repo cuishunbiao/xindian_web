@@ -1,6 +1,6 @@
 <template>
-	<h2>阶段2</h2>
-	<div v-show="type === '1' || type === '2'" ref="stepBoxAZ" class="step_box">
+	<h2>阶段2：院内流程</h2>
+	<div ref="stepBoxAZ" class="step_box">
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">是否已临床提单</div>
@@ -99,7 +99,7 @@
 		</div>
 	</div>
 	<div class="info_footer">
-		<button class="info_back" @click="backFn()">返回医院列表</button>
+		<button class="info_back" @click="backFn()">上一步阶段1</button>
 		<button class="info_submit" @click="submitFn">下一步阶段3</button>
 	</div>
 </template>
@@ -117,11 +117,12 @@ const stepBoxAZ = ref<HTMLElement | null>(null)
 const stepBoxCONX = ref<HTMLElement | null>(null)
 
 const backFn = () => {
+	const { type } = route.query
 	router.push({
-		path: `/hospital`,
+		path: `/info/step1_${type}`,
 		query: {
-			type,
-			city
+			...route.query,
+			step: 1
 		}
 	})
 }
@@ -163,15 +164,27 @@ const selectTimeFn = () => {
 	let hour = myDate.getHours()
 	let minuter = myDate.getMinutes()
 	//选择开始时间
-	new MobileSelect({
-		trigger: type === '1' ? '#shanghuiTime' : '#zhaobiaoTime',
+	const zhaobiao = new MobileSelect({
+		trigger: '#zhaobiaoTime',
 		selectType: 'ymdhm',
 		selectCla: 'start',
 		wheels: [{ data: YEARNUM }, { data: MONTHNUM }, { data: DAYNUM }, { data: HOUR }, { data: MINUTER }],
 		position: [year, month, date, hour, minuter],
 		callback: function (indexArr: Number, data: any) {
 			const time = `${data[0]}-${data[1]}-${data[2]} ${data[3]}:${data[4]}`
-			type === '1' ? (stepData.az_2_shanghui_time = time) : (stepData.conx_2_zhaobiao_shijian = time)
+			stepData.conx_2_zhaobiao_shijian = time
+		}
+	})
+
+	const shanghui = new MobileSelect({
+		trigger: '#shanghuiTime',
+		selectType: 'ymdhm',
+		selectCla: 'start',
+		wheels: [{ data: YEARNUM }, { data: MONTHNUM }, { data: DAYNUM }, { data: HOUR }, { data: MINUTER }],
+		position: [year, month, date, hour, minuter],
+		callback: function (indexArr: Number, data: any) {
+			const time = `${data[0]}-${data[1]}-${data[2]} ${data[3]}:${data[4]}`
+			stepData.az_2_shanghui_time = time
 		}
 	})
 }

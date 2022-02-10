@@ -1,6 +1,6 @@
 <template>
 	<div v-if="type === '1' || type === '2'">
-		<h2>红方 - 阶段3</h2>
+		<h2>红方 - 阶段3：合同签署</h2>
 		<div ref="stepBoxAZ" class="step_box">
 			<div class="step_box_content">
 				<div class="step_box_content_flex border borderBottom">
@@ -43,7 +43,7 @@
 		</div>
 	</div>
 	<div v-if="type === '3' || type === '2'">
-		<h2>康乃心 - 阶段3</h2>
+		<h2>康乃心 - 阶段3：合同签署</h2>
 		<div ref="stepBoxCONX" class="step_box">
 			<div class="step_box_content">
 				<div class="step_box_content_flex border borderBottom">
@@ -86,8 +86,8 @@
 		</div>
 	</div>
 	<div class="info_footer">
-		<button class="info_back" v-if="type !== '1'" @click="backFn()">返回医院列表</button>
-		<button class="info_submit" :class="{ width80: type === '1' }" @click="submitFn()">
+		<button class="info_back" @click="backFn()">上一步阶段2</button>
+		<button class="info_submit" @click="submitFn()">
 			{{ type === '1' ? '完成' : '下一步阶段4' }}
 		</button>
 	</div>
@@ -108,10 +108,10 @@ const stepBoxCONX = ref<HTMLElement | null>(null)
 
 const backFn = () => {
 	router.push({
-		path: `/hospital`,
+		path: `/info/step2`,
 		query: {
-			type,
-			city
+			...route.query,
+			step: 2
 		}
 	})
 }

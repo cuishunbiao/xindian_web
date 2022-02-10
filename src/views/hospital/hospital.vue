@@ -12,7 +12,7 @@
 		</div>
 		<div class="info_footer">
 			<button class="info_submit width80" style="width: 8rem; margin-left: 0" @click="backAreaFn()">
-				返回选择区域页
+				返回上一页
 			</button>
 		</div>
 	</div>
