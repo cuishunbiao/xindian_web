@@ -5,19 +5,18 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">是否已给院方初步介绍方案</div>
-				<div class="step_box_right step_box_right_button">
-					<div
-						class="icon_boolean"
-						:class="{ true: az_1_fangan === '是' }"
-						@click="isBooleanFn('az_1_fangan', az_1_fangan)"
-					></div>
+				<div class="step_box_right">
+					<label class="step_label"
+						><input type="radio" value="是" v-model="az_1_fangan" />是&nbsp;&nbsp;</label
+					>
+					<label class="step_label"><input type="radio" value="否" v-model="az_1_fangan" />否</label>
 				</div>
 			</div>
 			<div class="step_box_content_flex">
-				<div class="step_box_left step_box_left_label">时间</div>
-				<div class="step_box_right width80">
-					<div ref="shanghuiTime" id="shanghuiTime" class="select-tab-bg">
-						{{ stepData.az_2_shanghui_time }}
+				<div class="step_box_left step_box_left_label">初步介绍方案日期</div>
+				<div class="step_box_right">
+					<div ref="fanganTime" id="fanganTime" class="select-tab-bg">
+						{{ stepData.az_1_fangan_time }}
 					</div>
 				</div>
 			</div>
@@ -49,16 +48,23 @@
 		</div>
 	</div>
 	<!-- AZ 和 CONX -->
-	<div class="step_box mt35" v-if="az_1_fangan === '是'">
+	<div class="step_box mt35" v-show="az_1_fangan === '是'">
 		<div class="step_box_content">
 			<div class="step_box_content_flex">
 				<div class="step_box_left">康乃心是否已对接院方详细介绍方</div>
-				<div class="step_box_right step_box_right_button">
-					<div
-						class="icon_boolean"
-						:class="{ true: az_1_xiangxi_fangan === '是' }"
-						@click="isBooleanFn('az_1_xiangxi_fangan', az_1_xiangxi_fangan)"
-					></div>
+				<div class="step_box_right">
+					<label class="step_label"
+						><input type="radio" value="是" v-model="az_1_xiangxi_fangan" />是&nbsp;&nbsp;</label
+					>
+					<label class="step_label"><input type="radio" value="否" v-model="az_1_xiangxi_fangan" />否</label>
+				</div>
+			</div>
+			<div class="step_box_content_flex">
+				<div class="step_box_left step_box_left_label">康乃心详细介绍方案日期</div>
+				<div class="step_box_right">
+					<div ref="xiangxifanganTime" id="xiangxifanganTime" class="select-tab-bg">
+						{{ stepData.az_1_xiangxi_fangan_time }}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -73,30 +79,30 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex">
 				<div class="step_box_left">是否已确认方案</div>
-				<div class="step_box_right step_box_right_button">
-					<div
-						class="icon_boolean"
-						:class="{ true: az_1_xiangxi_queren === '是' }"
-						@click="isBooleanFn('az_1_xiangxi_queren', az_1_xiangxi_queren)"
-					></div>
+				<div class="step_box_right">
+					<label class="step_label"
+						><input type="radio" value="是" v-model="az_1_xiangxi_queren" />是&nbsp;&nbsp;</label
+					>
+					<label class="step_label"><input type="radio" value="否" v-model="az_1_xiangxi_queren" />否</label>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="info_footer">
 		<button class="info_back" @click="backFn()">返回上一页</button>
-		<button class="info_submit" @click="submitFn">下一步阶段2</button>
+		<button class="info_submit" @click="submitFn">保存</button>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, toRefs } from 'vue'
+import { ref, reactive, toRefs, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { postEditStepApi, getStepApi } from '@Request/api'
-import { errorFn } from '@Assets/ts/common'
+import { MONTHNUM, YEARNUM, DAYNUM, errorFn } from '@Assets/ts/common'
 const route = useRoute()
 const { hospital_id, step, type, city } = route.query
 const router = useRouter()
+const fanganTime = ref<HTMLElement | null>(null)
 
 const backFn = () => {
 	router.push({
@@ -110,12 +116,14 @@ const backFn = () => {
 //声明类型
 interface stepDataTS {
 	az_1_fangan: String
+	az_1_fangan_time: String
 	az_1_yuanfang_name: String
 	az_1_yuanfang_zhiwei: String
 	az_1_yuanfang_fankui: any
 	az_1_xiangxi_fangan: String
 	az_1_xiangxi_fankui: any
 	az_1_xiangxi_queren: String
+	az_1_xiangxi_fangan_time: String
 }
 //声明类型值
 type stepDataType =
@@ -126,16 +134,15 @@ type stepDataType =
 	| 'az_1_xiangxi_fangan'
 let stepData = reactive<stepDataTS>({
 	az_1_fangan: '否',
+	az_1_fangan_time: '',
 	az_1_yuanfang_name: '',
 	az_1_yuanfang_zhiwei: '',
 	az_1_yuanfang_fankui: '',
 	az_1_xiangxi_fangan: '否',
 	az_1_xiangxi_fankui: '',
-	az_1_xiangxi_queren: '否'
+	az_1_xiangxi_queren: '否',
+	az_1_xiangxi_fangan_time: ''
 })
-const isBooleanFn = (type: stepDataType, bool: Boolean) => {
-	stepData[type] === '是' ? (stepData[type] = '否') : (stepData[type] = '是')
-}
 
 //判断当前医院在第几步
 getStepApi({
@@ -174,4 +181,41 @@ const submitFn = () => {
 const { az_1_yuanfang_fankui, az_1_xiangxi_fankui, az_1_xiangxi_queren, az_1_xiangxi_fangan, az_1_fangan } = {
 	...toRefs(stepData)
 }
+
+//选择时间
+const selectTimeFn = () => {
+	let myDate = new Date()
+	let year = myDate.getFullYear() - 2018
+	let month = myDate.getMonth()
+	let date = myDate.getDate() - 1
+	//选择开始时间
+	const az_1_fangan_time_mobile = new MobileSelect({
+		trigger: '#fanganTime',
+		selectType: 'ymd',
+		selectCla: 'start',
+		wheels: [{ data: YEARNUM }, { data: MONTHNUM }, { data: DAYNUM }],
+		position: [year, month, date],
+		callback: function (indexArr: Number, data: any) {
+			const time = `${data[0]}-${data[1]}-${data[2]}`
+			stepData.az_1_fangan_time = time
+		}
+	})
+
+	//选择开始时间
+	const az_1_xiangxi_fangan_time_mobile = new MobileSelect({
+		trigger: '#xiangxifanganTime',
+		selectType: 'ymd',
+		selectCla: 'start',
+		wheels: [{ data: YEARNUM }, { data: MONTHNUM }, { data: DAYNUM }],
+		position: [year, month, date],
+		callback: function (indexArr: Number, data: any) {
+			const time = `${data[0]}-${data[1]}-${data[2]}`
+			stepData.az_1_xiangxi_fangan_time = time
+		}
+	})
+}
+
+onMounted(() => {
+	selectTimeFn()
+})
 </script>

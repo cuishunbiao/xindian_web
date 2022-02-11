@@ -4,6 +4,7 @@ const Login = () => import('@/views/login/login.vue')
 const Logout = () => import('@/views/logout/logout.vue')
 const Province = () => import('@/views/login/province.vue')
 const Hospital = () => import('@/views/hospital/hospital.vue')
+const Contact = () => import('@/views/hospital/contact.vue')
 const Info = () => import('@/views/hospital/info.vue')
 const Step1_1 = () => import('@/views/hospital/step/step1_1.vue')
 const Step1_2 = () => import('@/views/hospital/step/step1_2.vue')
@@ -31,6 +32,11 @@ const routes = [
 		path: '/hospital',
 		name: 'hospital',
 		component: Hospital
+	},
+	{
+		path: '/contact',
+		name: 'contact',
+		component: Contact
 	},
 	{
 		path: '/info',

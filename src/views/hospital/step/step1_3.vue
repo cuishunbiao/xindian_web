@@ -4,12 +4,13 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">是否已对接院方详细介绍方案</div>
-				<div class="step_box_right step_box_right_button">
-					<div
-						class="icon_boolean"
-						:class="{ true: conx_1_xiangxi_fangan === '是' }"
-						@click="isBooleanFn('conx_1_xiangxi_fangan', conx_1_xiangxi_fangan)"
-					></div>
+				<div class="step_box_right">
+					<label class="step_label"
+						><input type="radio" value="是" v-model="conx_1_xiangxi_fangan" />是&nbsp;&nbsp;</label
+					>
+					<label class="step_label"
+						><input type="radio" value="否" v-model="conx_1_xiangxi_fangan" />否</label
+					>
 				</div>
 			</div>
 			<div class="step_box_content_flex">
@@ -32,19 +33,20 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex">
 				<div class="step_box_left">是否已确认方案</div>
-				<div class="step_box_right step_box_right_button">
-					<div
-						class="icon_boolean"
-						:class="{ true: conx_1_xiangxi_queren === '是' }"
-						@click="isBooleanFn('conx_1_xiangxi_queren', conx_1_xiangxi_queren)"
-					></div>
+				<div class="step_box_right">
+					<label class="step_label"
+						><input type="radio" value="是" v-model="conx_1_xiangxi_queren" />是&nbsp;&nbsp;</label
+					>
+					<label class="step_label"
+						><input type="radio" value="否" v-model="conx_1_xiangxi_queren" />否</label
+					>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="info_footer">
 		<button class="info_back" @click="backFn()">返回上一页</button>
-		<button class="info_submit" @click="submitFn">下一步阶段2</button>
+		<button class="info_submit" @click="submitFn">保存</button>
 	</div>
 </template>
 
@@ -129,17 +131,15 @@ const selectTimeFn = () => {
 	let year = myDate.getFullYear() - 2018
 	let month = myDate.getMonth()
 	let date = myDate.getDate() - 1
-	let hour = myDate.getHours()
-	let minuter = myDate.getMinutes()
 	//选择开始时间
 	const zhaobiao = new MobileSelect({
 		trigger: '#xiangxifanganTime',
-		selectType: 'ymdhm',
+		selectType: 'ymd',
 		selectCla: 'start',
-		wheels: [{ data: YEARNUM }, { data: MONTHNUM }, { data: DAYNUM }, { data: HOUR }, { data: MINUTER }],
-		position: [year, month, date, hour, minuter],
+		wheels: [{ data: YEARNUM }, { data: MONTHNUM }, { data: DAYNUM }],
+		position: [year, month, date],
 		callback: function (indexArr: Number, data: any) {
-			const time = `${data[0]}-${data[1]}-${data[2]} ${data[3]}:${data[4]}`
+			const time = `${data[0]}-${data[1]}-${data[2]}`
 			stepData.conx_1_xiangxi_fangan_time = time
 		}
 	})

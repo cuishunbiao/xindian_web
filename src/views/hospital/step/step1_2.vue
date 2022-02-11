@@ -4,12 +4,11 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">是否已通知医院</div>
-				<div class="step_box_right step_box_right_button">
-					<div
-						class="icon_boolean"
-						:class="{ true: lianmeng_1_tz_status === '是' }"
-						@click="isBooleanFn('lianmeng_1_tz_status', lianmeng_1_tz_status)"
-					></div>
+				<div class="step_box_right">
+					<label class="step_label"
+						><input type="radio" value="是" v-model="lianmeng_1_tz_status" />是&nbsp;&nbsp;</label
+					>
+					<label class="step_label"><input type="radio" value="否" v-model="lianmeng_1_tz_status" />否</label>
 				</div>
 			</div>
 			<div class="step_box_content_flex border borderBottom">
@@ -60,12 +59,11 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">是否已在联盟官网提交报名</div>
-				<div class="step_box_right step_box_right_button">
-					<div
-						class="icon_boolean"
-						:class="{ true: lianmeng_1_baoming === '是' }"
-						@click="isBooleanFn('lianmeng_1_baoming', lianmeng_1_baoming)"
-					></div>
+				<div class="step_box_right">
+					<label class="step_label"
+						><input type="radio" value="是" v-model="lianmeng_1_baoming" />是&nbsp;&nbsp;</label
+					>
+					<label class="step_label"><input type="radio" value="否" v-model="lianmeng_1_baoming" />否</label>
 				</div>
 			</div>
 		</div>
@@ -75,9 +73,7 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex">
 				<div class="step_box_left">是否已给院方初步介绍方案</div>
-				<div class="step_box_right step_box_right_button">
-					<div class="icon_boolean" :class="{ true: az_1_fangan === '是' }"></div>
-				</div>
+				<div class="step_box_right">{{ az_1_fangan }}</div>
 			</div>
 		</div>
 		<div class="step_box_content">
@@ -106,30 +102,46 @@
 	<div class="step_box step_box_false mt35">
 		<div class="step_box_content">
 			<div class="step_box_content_flex">
-				<div class="step_box_left">是否已对接院方详细介绍方案</div>
-				<div class="step_box_right step_box_right_button">
-					<div class="icon_boolean" :class="{ true: az_conx_1_xiangxi_fangan === '是' }"></div>
-				</div>
+				<div class="step_box_left">红方是否已对接院方详细介绍方案</div>
+				<div class="step_box_right">{{ az_1_xiangxi_fangan }}</div>
 			</div>
 		</div>
 		<div class="step_box_content paddingB30">
 			<div class="step_box_content_flex">
 				<div class="step_box_left">院方反馈（尽可能详述）</div>
 			</div>
-			<div class="step_box_content_flex">{{ az_conx_1_xiangxi_fankui }}</div>
+			<div class="step_box_content_flex">{{ az_1_xiangxi_fankui }}</div>
 		</div>
 		<div class="step_box_content">
 			<div class="step_box_content_flex">
 				<div class="step_box_left">是否已确认方案</div>
-				<div class="step_box_right step_box_right_button">
-					<div class="icon_boolean" :class="{ true: az_conx_1_xiangxi_queren === '是' }"></div>
-				</div>
+				<div class="step_box_right">{{ az_1_xiangxi_queren }}</div>
+			</div>
+		</div>
+	</div>
+	<div class="step_box step_box_false mt35">
+		<div class="step_box_content">
+			<div class="step_box_content_flex">
+				<div class="step_box_left">康乃心是否已对接院方详细介绍方案</div>
+				<div class="step_box_right">{{ conx_1_xiangxi_fangan }}</div>
+			</div>
+		</div>
+		<div class="step_box_content paddingB30">
+			<div class="step_box_content_flex">
+				<div class="step_box_left">院方反馈（尽可能详述）</div>
+			</div>
+			<div class="step_box_content_flex">{{ conx_1_xiangxi_fankui }}</div>
+		</div>
+		<div class="step_box_content">
+			<div class="step_box_content_flex">
+				<div class="step_box_left">是否已确认方案</div>
+				<div class="step_box_right">{{ conx_1_xiangxi_queren }}</div>
 			</div>
 		</div>
 	</div>
 	<div class="info_footer">
 		<button class="info_back" @click="backFn()">返回上一页</button>
-		<button class="info_submit" @click="submitFn">下一步阶段2</button>
+		<button class="info_submit" @click="submitFn">保存</button>
 	</div>
 </template>
 
@@ -137,8 +149,8 @@
 import { ref, onMounted, reactive, toRefs } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { postEditStepApi, getStepApi } from '@Request/api'
-import { MONTHNUM, YEARNUM, DAYNUM, HOUR, MINUTER, errorFn } from '@Assets/ts/common'
-import { emit } from 'process'
+import { MONTHNUM, YEARNUM, DAYNUM, errorFn } from '@Assets/ts/common'
+
 const tongzhiTime = ref<HTMLElement | null>(null)
 const route = useRoute()
 const { hospital_id, step, type, city } = route.query
@@ -201,27 +213,23 @@ let stepData = reactive<stepDataTS>({
 	conx_1_xiangxi_fankui: '',
 	conx_1_xiangxi_queren: ''
 })
-const isBooleanFn = (type: stepDataType, bool: Boolean) => {
-	stepData[type] === '是' ? (stepData[type] = '否') : (stepData[type] = '是')
-}
+
 //选择时间
 const selectTimeFn = () => {
 	let myDate = new Date()
 	let year = myDate.getFullYear() - 2018
 	let month = myDate.getMonth()
 	let date = myDate.getDate() - 1
-	let hour = myDate.getHours()
-	let minuter = myDate.getMinutes()
 	//选择开始时间
 	new MobileSelect({
 		trigger: '#tongzhiTime',
-		selectType: 'ymdhm',
+		selectType: 'ymd',
 		selectCla: 'start',
-		wheels: [{ data: YEARNUM }, { data: MONTHNUM }, { data: DAYNUM }, { data: HOUR }, { data: MINUTER }],
-		position: [year, month, date, hour, minuter],
+		wheels: [{ data: YEARNUM }, { data: MONTHNUM }, { data: DAYNUM }],
+		position: [year, month, date],
 		callback: function (indexArr: Number, data: any) {
 			if (!tongzhiTime.value) return
-			const time = `${data[0]}-${data[1]}-${data[2]} ${data[3]}:${data[4]}`
+			const time = `${data[0]}-${data[1]}-${data[2]}`
 			stepData.lianmeng_1_tz_time = time
 		}
 	})
@@ -267,7 +275,19 @@ onMounted(() => {
 	selectTimeFn()
 })
 // 解构
-const { lianmeng_1_tz_status, lianmeng_1_baoming, lianmeng_1_yuanfang_fankui, az_1_yuanfang_fankui, az_1_fangan } = {
+const {
+	lianmeng_1_tz_status,
+	lianmeng_1_baoming,
+	lianmeng_1_yuanfang_fankui,
+	az_1_yuanfang_fankui,
+	az_1_fangan,
+	az_1_xiangxi_fangan,
+	az_1_xiangxi_fankui,
+	az_1_xiangxi_queren,
+	conx_1_xiangxi_fangan,
+	conx_1_xiangxi_fankui,
+	conx_1_xiangxi_queren
+} = {
 	...toRefs(stepData)
 }
 </script>

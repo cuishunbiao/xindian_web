@@ -25,6 +25,8 @@ const getStepApi = (params: any, config?: any) => getRequest(`${BaseUrl}/Index/d
 
 //提交步骤信息
 const postEditStepApi = (params: any, config?: any) => getRequest(`${BaseUrl}/Index/do_edit_step`, params)
+//提交步骤信息
+const postEditZhiyuanApi = (params: any, config?: any) => getRequest(`${BaseUrl}/Index/do_exit_zhiyuan`, params)
 
 //获取登录信息
 const getIsLoginApi = (params?: any, config?: any) => getRequest(`${BaseUrl}/User/is_login`, params)
@@ -38,5 +40,6 @@ export {
 	postLogoutApi,
 	getStepApi,
 	postEditStepApi,
-	getIsLoginApi
+	getIsLoginApi,
+	postEditZhiyuanApi
 }

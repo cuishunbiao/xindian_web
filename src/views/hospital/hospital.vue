@@ -54,38 +54,49 @@ const getHospitalFn = () => {
 getHospitalFn()
 
 const toStepPageFn = (item: any) => {
-	/**
-	 * step  是联盟当前阶段
-	 * az_step  是红方当前阶段
-	 * conx_step 是 conx 当前步骤
-	 *
-	 * type = 1 红方
-	 * type = 2 联盟
-	 * type = 3 CONX
-	 */
-	//根据 type 判断走哪个页面
-	let stepNumber = 1
-	if (type === '1') {
-		stepNumber += Number(item.az_step === '3' ? 2 : item.az_step)
-	} else if (type === '2') {
-		stepNumber += Number(item.step === '4' ? 3 : item.step)
-	} else if (type === '3') {
-		stepNumber += Number(item.conx_step === '4' ? 3 : item.conx_step)
-	}
-	let routeType = ''
-	if (stepNumber === 1) {
-		routeType = `_${route.query.type}`
-	}
 	router.push({
-		path: `/info/step${stepNumber}${routeType}`,
+		path: '/contact',
 		query: {
+			...item,
 			type,
-			hospital_id: item.id,
-			step: stepNumber,
 			city
 		}
 	})
 }
+
+// const toStepPageFn = (item: any) => {
+// 	/**
+// 	 * step  是联盟当前阶段
+// 	 * az_step  是红方当前阶段
+// 	 * conx_step 是 conx 当前步骤
+// 	 *
+// 	 * type = 1 红方
+// 	 * type = 2 联盟
+// 	 * type = 3 CONX
+// 	 */
+// 	//根据 type 判断走哪个页面
+// 	let stepNumber = 1
+// 	if (type === '1') {
+// 		stepNumber += Number(item.az_step === '3' ? 2 : item.az_step)
+// 	} else if (type === '2') {
+// 		stepNumber += Number(item.step === '4' ? 3 : item.step)
+// 	} else if (type === '3') {
+// 		stepNumber += Number(item.conx_step === '4' ? 3 : item.conx_step)
+// 	}
+// 	let routeType = ''
+// 	if (stepNumber === 1) {
+// 		routeType = `_${route.query.type}`
+// 	}
+// 	router.push({
+// 		path: `/info/step${stepNumber}${routeType}`,
+// 		query: {
+// 			type,
+// 			hospital_id: item.id,
+// 			step: stepNumber,
+// 			city
+// 		}
+// 	})
+// }
 
 watch(
 	() => hospital_name.value,

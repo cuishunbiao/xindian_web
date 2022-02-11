@@ -59,6 +59,13 @@ h2 {
 			text-align: right;
 			height: 0.7rem;
 		}
+		&.step_box_right70 {
+			flex: 0 0 70%;
+			text-align: right;
+			input {
+				width: 100%;
+			}
+		}
 	}
 	.step_box_right_button {
 		flex: 0 0 1.87rem;
@@ -134,7 +141,7 @@ h2 {
 	right: 0;
 	bottom: 0;
 	background-color: transparent;
-	z-index: 2;
+	z-index: 20;
 }
 
 .step_box_false::before {
@@ -146,4 +153,11 @@ h2 {
 	-moz-filter: grayscale(100%);
 	-ms-filter: grayscale(100%);
 	filter: grayscale(100%);
+}
+.step_label {
+	vertical-align: middle;
+	input {
+		vertical-align: middle;
+		margin-top: -2px;
+	}
 }

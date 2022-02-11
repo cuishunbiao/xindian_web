@@ -5,12 +5,11 @@
 			<div class="step_box_content">
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left">是否完成签署</div>
-					<div class="step_box_right step_box_right_button">
-						<div
-							class="icon_boolean"
-							:class="{ true: stepData.az_3_qianshu === '是' }"
-							@click="isBooleanFn('az_3_qianshu', stepData.az_3_qianshu)"
-						></div>
+					<div class="step_box_right">
+						<label class="step_label"
+							><input type="radio" value="是" v-model="az_3_qianshu" />是&nbsp;&nbsp;</label
+						>
+						<label class="step_label"><input type="radio" value="否" v-model="az_3_qianshu" />否</label>
 					</div>
 				</div>
 				<div class="step_box_content_flex border borderBottom">
@@ -25,12 +24,11 @@
 			<div class="step_box_content">
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left">是否开票付款</div>
-					<div class="step_box_right step_box_right_button">
-						<div
-							class="icon_boolean"
-							:class="{ true: stepData.az_3_kaipiao === '是' }"
-							@click="isBooleanFn('az_3_kaipiao', stepData.az_3_kaipiao)"
-						></div>
+					<div class="step_box_right">
+						<label class="step_label"
+							><input type="radio" value="是" v-model="az_3_kaipiao" />是&nbsp;&nbsp;</label
+						>
+						<label class="step_label"><input type="radio" value="否" v-model="az_3_kaipiao" />否</label>
 					</div>
 				</div>
 				<div class="step_box_content_flex border borderBottom">
@@ -48,12 +46,11 @@
 			<div class="step_box_content">
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left">是否完成签署</div>
-					<div class="step_box_right step_box_right_button">
-						<div
-							class="icon_boolean"
-							:class="{ true: stepData.conx_3_qianshu === '是' }"
-							@click="isBooleanFn('conx_3_qianshu', stepData.conx_3_qianshu)"
-						></div>
+					<div class="step_box_right">
+						<label class="step_label"
+							><input type="radio" value="是" v-model="conx_3_qianshu" />是&nbsp;&nbsp;</label
+						>
+						<label class="step_label"><input type="radio" value="否" v-model="conx_3_qianshu" />否</label>
 					</div>
 				</div>
 				<div class="step_box_content_flex border borderBottom">
@@ -68,12 +65,11 @@
 			<div class="step_box_content">
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left">是否开票付款</div>
-					<div class="step_box_right step_box_right_button">
-						<div
-							class="icon_boolean"
-							:class="{ true: stepData.conx_3_kaipiao === '是' }"
-							@click="isBooleanFn('conx_3_kaipiao', stepData.conx_3_kaipiao)"
-						></div>
+					<div class="step_box_right">
+						<label class="step_label"
+							><input type="radio" value="是" v-model="conx_3_kaipiao" />是&nbsp;&nbsp;</label
+						>
+						<label class="step_label"><input type="radio" value="否" v-model="conx_3_kaipiao" />否</label>
 					</div>
 				</div>
 				<div class="step_box_content_flex border borderBottom">
@@ -88,15 +84,15 @@
 	<div class="info_footer">
 		<button class="info_back" @click="backFn()">上一步阶段2</button>
 		<button class="info_submit" @click="submitFn()">
-			{{ type === '1' ? '完成' : '下一步阶段4' }}
+			{{ type === '1' ? '完成' : '保存' }}
 		</button>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, reactive } from 'vue'
+import { ref, onMounted, reactive, toRefs } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { MONTHNUM, YEARNUM, DAYNUM, HOUR, MINUTER, errorFn } from '../../../assets/ts/common'
+import { MONTHNUM, YEARNUM, DAYNUM, errorFn } from '../../../assets/ts/common'
 import { getStepApi, postEditStepApi } from '@Request/api'
 const qianshu1Time = ref<HTMLElement | null>(null)
 const qianshu2Time = ref<HTMLElement | null>(null)
@@ -158,17 +154,15 @@ const selectTimeFn = () => {
 	let year = myDate.getFullYear() - 2018
 	let month = myDate.getMonth()
 	let date = myDate.getDate() - 1
-	let hour = myDate.getHours()
-	let minuter = myDate.getMinutes()
 	//选择开始时间
 	new MobileSelect({
 		trigger: type === '1' ? '#qianshu1Time' : '#qianshu2Time',
-		selectType: 'ymdhm',
+		selectType: 'ymd',
 		selectCla: 'start',
-		wheels: [{ data: YEARNUM }, { data: MONTHNUM }, { data: DAYNUM }, { data: HOUR }, { data: MINUTER }],
-		position: [year, month, date, hour, minuter],
+		wheels: [{ data: YEARNUM }, { data: MONTHNUM }, { data: DAYNUM }],
+		position: [year, month, date],
 		callback: function (indexArr: Number, data: any) {
-			const time = `${data[0]}-${data[1]}-${data[2]} ${data[3]}:${data[4]}`
+			const time = `${data[0]}-${data[1]}-${data[2]}`
 			type === '1' ? (stepData.az_3_qianshu_shijian = time) : (stepData.conx_3_qianshu_shijian = time)
 		}
 	})
@@ -247,7 +241,9 @@ const submitFn = () => {
 		}
 	})
 }
-
+const { az_3_qianshu, az_3_kaipiao, conx_3_qianshu, conx_3_kaipiao } = {
+	...toRefs(stepData)
+}
 onMounted(() => {
 	showBoxFn()
 	if (type === '2') return

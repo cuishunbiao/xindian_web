@@ -5,12 +5,13 @@
 			<div class="step_box_content">
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left">数据是否已对接联盟平台</div>
-					<div class="step_box_right step_box_right_button">
-						<div
-							class="icon_boolean"
-							:class="{ true: stepData.lianmeng_4_duijie === '是' }"
-							@click="isBooleanFn('lianmeng_4_duijie', stepData.lianmeng_4_duijie)"
-						></div>
+					<div class="step_box_right">
+						<label class="step_label"
+							><input type="radio" value="是" v-model="lianmeng_4_duijie" />是&nbsp;&nbsp;</label
+						>
+						<label class="step_label"
+							><input type="radio" value="否" v-model="lianmeng_4_duijie" />否</label
+						>
 					</div>
 				</div>
 			</div>
@@ -22,12 +23,11 @@
 			<div class="step_box_content">
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left">数据是否已对接联盟平台</div>
-					<div class="step_box_right step_box_right_button">
-						<div
-							class="icon_boolean"
-							:class="{ true: stepData.conx_4_duijie === '是' }"
-							@click="isBooleanFn('conx_4_duijie', stepData.conx_4_duijie)"
-						></div>
+					<div class="step_box_right">
+						<label class="step_label"
+							><input type="radio" value="是" v-model="conx_4_duijie" />是&nbsp;&nbsp;</label
+						>
+						<label class="step_label"><input type="radio" value="否" v-model="conx_4_duijie" />否</label>
 					</div>
 				</div>
 			</div>
@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, toRefs } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { errorFn } from '@Assets/ts/common'
 import { getStepApi, postEditStepApi } from '@Request/api'
@@ -108,4 +108,5 @@ const submitFn = () => {
 		}
 	})
 }
+const { lianmeng_4_duijie, conx_4_duijie } = { ...toRefs(stepData) }
 </script>

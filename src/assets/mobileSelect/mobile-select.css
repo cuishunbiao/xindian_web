@@ -167,10 +167,10 @@
 	margin: 0.45rem 0;
 }
 .mobileSelect-ymd .content .panel .wheel {
-	width: 2.5rem !important;
+	width: 33% !important;
 }
 .mobileSelect-ymd .content .panel .wheel:first-child {
-	width: 3.7rem !important;
+	width: 33% !important;
 }
 .mobileSelect-ymd .content .panel .wheel .selectContainer li {
 	font-size: 0.43rem;
@@ -186,13 +186,13 @@
 	text-overflow: ellipsis;
 }
 .selectLine-year {
-	left: 3.35rem;
+	left: 23%;
 }
 .selectLine-month {
-	left: 6.04rem;
+	left: 52%;
 }
 .selectLine-day {
-	left: 8.6rem;
+	left: 85%;
 }
 
 .mobileSelect-ymdh .content .panel {

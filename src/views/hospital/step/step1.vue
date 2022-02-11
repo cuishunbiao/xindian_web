@@ -226,17 +226,15 @@ const selectTimeFn = () => {
 	let year = myDate.getFullYear() - 2018
 	let month = myDate.getMonth()
 	let date = myDate.getDate() - 1
-	let hour = myDate.getHours()
-	let minuter = myDate.getMinutes()
 	//选择开始时间
 	new MobileSelect({
 		trigger: '#tongzhiTime',
-		selectType: 'ymdhm',
+		selectType: 'ymd',
 		selectCla: 'start',
-		wheels: [{ data: YEARNUM }, { data: MONTHNUM }, { data: DAYNUM }, { data: HOUR }, { data: MINUTER }],
-		position: [year, month, date, hour, minuter],
+		wheels: [{ data: YEARNUM }, { data: MONTHNUM }, { data: DAYNUM }],
+		position: [year, month, date],
 		callback: function (indexArr: Number, data: any) {
-			const time = `${data[0]}-${data[1]}-${data[2]} ${data[3]}:${data[4]}`
+			const time = `${data[0]}-${data[1]}-${data[2]}`
 			stepData.lianmeng_1_tz_time = time
 		}
 	})
