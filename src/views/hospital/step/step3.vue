@@ -84,7 +84,7 @@
 	<div class="info_footer">
 		<button class="info_back" @click="backFn()">上一步阶段2</button>
 		<button class="info_submit" @click="submitFn()">
-			{{ type === '1' ? '完成' : '保存' }}
+			{{ type === '1' ? '完成' : '保存并转至下一页' }}
 		</button>
 	</div>
 </template>
@@ -134,19 +134,15 @@ interface stepDataTS {
 //声明类型值
 type stepDataType = 'az_3_qianshu' | 'az_3_kaipiao' | 'conx_3_qianshu' | 'conx_3_kaipiao'
 let stepData = reactive<stepDataTS>({
-	az_3_qianshu: '否',
-	az_3_qianshu_shijian: '请选择时间',
-	az_3_kaipiao: '否',
+	az_3_qianshu: '',
+	az_3_qianshu_shijian: '',
+	az_3_kaipiao: '',
 	az_3_kaipiao_jine: '',
-	conx_3_qianshu: '否',
-	conx_3_qianshu_shijian: '请选择时间',
-	conx_3_kaipiao: '否',
+	conx_3_qianshu: '',
+	conx_3_qianshu_shijian: '',
+	conx_3_kaipiao: '',
 	conx_3_kaipiao_jine: ''
 })
-
-const isBooleanFn = (type: stepDataType, bool: Boolean) => {
-	stepData[type] === '是' ? (stepData[type] = '否') : (stepData[type] = '是')
-}
 
 //选择时间
 const selectTimeFn = () => {

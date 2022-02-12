@@ -7,7 +7,9 @@
 				</div>
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left step_box_left_label">负责人</div>
-					<div class="step_box_right step_box_right70">{{ lianmeng }}</div>
+					<div class="step_box_right step_box_right70">
+						<input type="text" v-model="lianmeng" placeholder="请输入内容" />
+					</div>
 				</div>
 			</div>
 		</div>
@@ -16,10 +18,10 @@
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left">红方</div>
 				</div>
-				<div class="step_box_content_flex border borderBottom">
+				<!-- <div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left step_box_left_label">联系人</div>
 					<div class="step_box_right step_box_right70">{{ az_lianxi }}</div>
-				</div>
+				</div> -->
 				<div class="step_box_content_flex">
 					<div class="step_box_left step_box_left_label">志愿者</div>
 					<div class="step_box_right step_box_right70">
@@ -33,10 +35,10 @@
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left">康乃心</div>
 				</div>
-				<div class="step_box_content_flex border borderBottom">
+				<!-- <div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left step_box_left_label">联系人</div>
 					<div class="step_box_right step_box_right70">{{ conx_lianxi }}</div>
-				</div>
+				</div> -->
 				<div class="step_box_content_flex">
 					<div class="step_box_left step_box_left_label">志愿者</div>
 					<div class="step_box_right step_box_right70">
@@ -48,7 +50,7 @@
 		<div class="info_footer">
 			<button class="info_back" @click="backFn()">返回上一页</button>
 			<button class="info_submit" v-if="type === '2'" @click="toStepPageFn()">下一页</button>
-			<button class="info_submit" v-else @click="submitFn()">保存</button>
+			<button class="info_submit" v-else @click="submitFn()">保存并转至下一页</button>
 		</div>
 	</div>
 </template>

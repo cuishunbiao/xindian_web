@@ -35,7 +35,7 @@
 	</div>
 	<div class="info_footer">
 		<button class="info_back" @click="backFn()">上一步阶段3</button>
-		<button class="info_submit" @click="submitFn()">完成</button>
+		<button class="info_submit" @click="submitFn()">保存并转至下一页</button>
 	</div>
 </template>
 
@@ -54,16 +54,10 @@ interface stepDataTS {
 	conx_4_duijie: String
 	lianmeng_4_duijie: String
 }
-//声明类型值
-type stepDataType = 'conx_4_duijie' | 'lianmeng_4_duijie'
 let stepData = reactive<stepDataTS>({
-	conx_4_duijie: '否',
-	lianmeng_4_duijie: '否'
+	conx_4_duijie: '',
+	lianmeng_4_duijie: ''
 })
-
-const isBooleanFn = (type: stepDataType, bool: Boolean) => {
-	stepData[type] === '是' ? (stepData[type] = '否') : (stepData[type] = '是')
-}
 
 const backFn = () => {
 	router.push({

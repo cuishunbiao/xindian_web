@@ -1,6 +1,6 @@
 <template>
 	<h2>阶段2：院内流程</h2>
-	<div ref="stepBoxAZ" class="step_box">
+	<div ref="stepBoxLianmeng" class="step_box">
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">是否已临床提单</div>
@@ -15,7 +15,7 @@
 				<div class="step_box_left step_box_left_label">临床提单日期</div>
 				<div class="step_box_right">
 					<div ref="tidanTime" id="tidanTime" class="select-tab-bg">
-						{{ stepData.az_2_linchuang_tidan_time }}
+						{{ az_2_linchuang_tidan_time }}
 					</div>
 				</div>
 			</div>
@@ -71,7 +71,42 @@
 				</div>
 			</div>
 		</div>
+		<div ref="stepBoxCONX" v-show="stepData.az_2_zhaobiao === '是'" class="step_box mt35">
+			<div class="step_box_content">
+				<div class="step_box_content_flex border borderBottom">
+					<div class="step_box_left">招标材料是否准备就绪</div>
+					<div class="step_box_right">
+						<label class="step_label"
+							><input type="radio" value="是" v-model="az_2_zhaobiao_zhunbei" />是&nbsp;&nbsp;</label
+						>
+						<label class="step_label"
+							><input type="radio" value="否" v-model="az_2_zhaobiao_zhunbei" />否</label
+						>
+					</div>
+				</div>
+			</div>
+			<div class="step_box_content">
+				<div class="step_box_content_flex border borderBottom">
+					<div class="step_box_left">招投标</div>
+				</div>
+				<div class="step_box_content_flex border borderBottom">
+					<div class="step_box_left step_box_left_label">时间</div>
+					<div class="step_box_right width80">
+						<div ref="zhaobiaoTime" id="zhaobiaoTime" class="select-tab-bg">
+							{{ az_2_zhaobiao_shijian }}
+						</div>
+					</div>
+				</div>
+				<div class="step_box_content_flex">
+					<div class="step_box_left step_box_left_label">结果</div>
+					<div class="step_box_right">
+						<input type="text" v-model="az_2_zhaobiao_jieguo" placeholder="请输入结果" />
+					</div>
+				</div>
+			</div>
+		</div>
 	</template>
+	<!-- CONX -->
 	<template v-if="type === '3'">
 		<h4 class="mt35">康乃心</h4>
 		<div ref="stepBoxCONXZhaobiao" class="step_box">
@@ -87,49 +122,45 @@
 				</div>
 			</div>
 		</div>
-	</template>
-	<!-- CONX -->
-	<div
-		ref="stepBoxCONX"
-		v-show="(type === '3' && stepData.az_2_zhaobiao === '是') || type === '2'"
-		class="step_box mt35"
-	>
-		<div class="step_box_content">
-			<div class="step_box_content_flex border borderBottom">
-				<div class="step_box_left">招标材料是否准备就绪</div>
-				<div class="step_box_right">
-					<label class="step_label"
-						><input type="radio" value="是" v-model="conx_2_zhaobiao_zhunbei" />是&nbsp;&nbsp;</label
-					>
-					<label class="step_label"
-						><input type="radio" value="否" v-model="conx_2_zhaobiao_zhunbei" />否</label
-					>
-				</div>
-			</div>
-		</div>
-		<div class="step_box_content">
-			<div class="step_box_content_flex border borderBottom">
-				<div class="step_box_left">招投标</div>
-			</div>
-			<div class="step_box_content_flex border borderBottom">
-				<div class="step_box_left step_box_left_label">时间</div>
-				<div class="step_box_right width80">
-					<div ref="zhaobiaoTime" id="zhaobiaoTime" class="select-tab-bg">
-						{{ stepData.conx_2_zhaobiao_shijian }}
+		<div ref="stepBoxCONX" v-show="stepData.conx_2_zhaobiao === '是'" class="step_box mt35">
+			<div class="step_box_content">
+				<div class="step_box_content_flex border borderBottom">
+					<div class="step_box_left">招标材料是否准备就绪</div>
+					<div class="step_box_right">
+						<label class="step_label"
+							><input type="radio" value="是" v-model="conx_2_zhaobiao_zhunbei" />是&nbsp;&nbsp;</label
+						>
+						<label class="step_label"
+							><input type="radio" value="否" v-model="conx_2_zhaobiao_zhunbei" />否</label
+						>
 					</div>
 				</div>
 			</div>
-			<div class="step_box_content_flex">
-				<div class="step_box_left step_box_left_label">结果</div>
-				<div class="step_box_right">
-					<input type="text" v-model="stepData.conx_2_zhaobiao_jieguo" placeholder="请输入结果" />
+			<div class="step_box_content">
+				<div class="step_box_content_flex border borderBottom">
+					<div class="step_box_left">招投标</div>
+				</div>
+				<div class="step_box_content_flex border borderBottom">
+					<div class="step_box_left step_box_left_label">时间</div>
+					<div class="step_box_right width80">
+						<div ref="zhaobiaoTime" id="zhaobiaoTime" class="select-tab-bg">
+							{{ conx_2_zhaobiao_shijian }}
+						</div>
+					</div>
+				</div>
+				<div class="step_box_content_flex">
+					<div class="step_box_left step_box_left_label">结果</div>
+					<div class="step_box_right">
+						<input type="text" v-model="conx_2_zhaobiao_jieguo" placeholder="请输入结果" />
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</template>
+
 	<div class="info_footer">
 		<button class="info_back" @click="backFn()">上一步阶段1</button>
-		<button class="info_submit" @click="submitFn">保存</button>
+		<button class="info_submit" @click="submitFn">保存并转至下一页</button>
 	</div>
 </template>
 
@@ -165,6 +196,9 @@ interface stepDataTS {
 	az_2_shanghui_time: String
 	az_2_shanghui_jieguo: String
 	az_2_zhaobiao: String
+	az_2_zhaobiao_zhunbei: String
+	az_2_zhaobiao_shijian: String
+	az_2_zhaobiao_jieguo: String
 	conx_2_zhaobiao_zhunbei: String
 	conx_2_zhaobiao_shijian: String
 	conx_2_zhaobiao_jieguo: String
@@ -174,12 +208,15 @@ interface stepDataTS {
 //声明类型值
 type stepDataType = 'az_2_linchuang_tidan' | 'az_2_linchuang_pizhun' | 'az_2_zhaobiao' | 'conx_2_zhaobiao_zhunbei'
 let stepData = reactive<stepDataTS>({
-	az_2_linchuang_tidan: '否',
-	az_2_linchuang_pizhun: '否',
+	az_2_linchuang_tidan: '',
+	az_2_linchuang_pizhun: '',
 	az_2_shanghui_time: '',
 	az_2_shanghui_jieguo: '',
 	az_2_zhaobiao: '',
-	conx_2_zhaobiao_zhunbei: '否',
+	az_2_zhaobiao_zhunbei: '',
+	az_2_zhaobiao_shijian: '',
+	az_2_zhaobiao_jieguo: '',
+	conx_2_zhaobiao_zhunbei: '',
 	conx_2_zhaobiao_shijian: '',
 	conx_2_zhaobiao_jieguo: '',
 	conx_2_zhaobiao: '',
@@ -304,7 +341,21 @@ const submitFn = () => {
 		}
 	})
 }
-const { az_2_linchuang_tidan, az_2_linchuang_pizhun, az_2_zhaobiao, conx_2_zhaobiao_zhunbei, conx_2_zhaobiao } = {
+const {
+	az_2_linchuang_tidan,
+	az_2_linchuang_pizhun,
+	az_2_shanghui_time,
+	az_2_shanghui_jieguo,
+	az_2_zhaobiao,
+	az_2_zhaobiao_zhunbei,
+	az_2_zhaobiao_shijian,
+	az_2_zhaobiao_jieguo,
+	conx_2_zhaobiao_zhunbei,
+	conx_2_zhaobiao_shijian,
+	conx_2_zhaobiao_jieguo,
+	conx_2_zhaobiao,
+	az_2_linchuang_tidan_time
+} = {
 	...toRefs(stepData)
 }
 
@@ -320,6 +371,7 @@ watch([() => az_2_zhaobiao.value, () => conx_2_zhaobiao.value], (azval, conxval)
 		isWatch = true
 		return
 	}
+	if (!azval[0] || !azval[1]) return
 	if (azval[0] != azval[1]) {
 		errorFn('红方和康乃心的是否招标不一致。')
 	}

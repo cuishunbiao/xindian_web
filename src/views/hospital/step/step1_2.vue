@@ -3,7 +3,7 @@
 	<div class="step_box">
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
-				<div class="step_box_left">是否已通知医院</div>
+				<div class="step_box_left">联盟是否已通知医院</div>
 				<div class="step_box_right">
 					<label class="step_label"
 						><input type="radio" value="是" v-model="lianmeng_1_tz_status" />是&nbsp;&nbsp;</label
@@ -45,7 +45,7 @@
 		</div>
 		<div class="step_box_content paddingB30">
 			<div class="step_box_content_flex">
-				<div class="step_box_left">院方反馈</div>
+				<div class="step_box_left">院方反馈联盟信息</div>
 			</div>
 			<div class="step_box_content_flex border borderAll">
 				<textarea
@@ -58,7 +58,7 @@
 		</div>
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
-				<div class="step_box_left">是否已在联盟官网提交报名</div>
+				<div class="step_box_left">医院是否已在联盟官网提交报名</div>
 				<div class="step_box_right">
 					<label class="step_label"
 						><input type="radio" value="是" v-model="lianmeng_1_baoming" />是&nbsp;&nbsp;</label
@@ -141,7 +141,7 @@
 	</div>
 	<div class="info_footer">
 		<button class="info_back" @click="backFn()">返回上一页</button>
-		<button class="info_submit" @click="submitFn">保存</button>
+		<button class="info_submit" @click="submitFn">保存并转至下一页</button>
 	</div>
 </template>
 
@@ -195,21 +195,21 @@ type stepDataType =
 	| 'az_1_xiangxi_queren'
 	| 'conx_1_xiangxi_fangan'
 let stepData = reactive<stepDataTS>({
-	lianmeng_1_tz_status: '否',
+	lianmeng_1_tz_status: '',
 	lianmeng_1_tz_type: '',
-	lianmeng_1_tz_time: '请选择时间',
+	lianmeng_1_tz_time: '',
 	lianmeng_1_yuanfang_name: '',
 	lianmeng_1_yuanfang_zhiwei: '',
 	lianmeng_1_yuanfang_fankui: '',
-	lianmeng_1_baoming: '否',
-	az_1_fangan: '否',
+	lianmeng_1_baoming: '',
+	az_1_fangan: '',
 	az_1_yuanfang_name: '',
 	az_1_yuanfang_zhiwei: '',
 	az_1_yuanfang_fankui: '',
-	az_1_xiangxi_fangan: '否',
+	az_1_xiangxi_fangan: '',
 	az_1_xiangxi_fankui: '',
-	az_1_xiangxi_queren: '否',
-	conx_1_xiangxi_fangan: '否',
+	az_1_xiangxi_queren: '',
+	conx_1_xiangxi_fangan: '',
 	conx_1_xiangxi_fankui: '',
 	conx_1_xiangxi_queren: ''
 })
