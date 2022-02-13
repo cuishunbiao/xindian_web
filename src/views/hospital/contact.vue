@@ -1,6 +1,7 @@
 <template>
 	<div class="contact">
-		<div class="step_box step_box_false step_box_false_bg">
+		<h2 style="margin-top: 0">三方联系人信息</h2>
+		<div ref="lianmengBox" class="step_box step_box_false step_box_false_bg">
 			<div class="step_box_content">
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left">联盟</div>
@@ -12,8 +13,9 @@
 					</div>
 				</div>
 			</div>
+			<div class="step_box_false_bg_after"></div>
 		</div>
-		<div ref="azBox" class="step_box mt35">
+		<div ref="azBox" class="step_box step_box_false step_box_false_bg mt35">
 			<div class="step_box_content">
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left">红方</div>
@@ -29,8 +31,9 @@
 					</div>
 				</div>
 			</div>
+			<div class="step_box_false_bg_after"></div>
 		</div>
-		<div ref="conxBox" class="step_box mt35">
+		<div ref="conxBox" class="step_box step_box_false step_box_false_bg mt35">
 			<div class="step_box_content">
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left">康乃心</div>
@@ -46,11 +49,11 @@
 					</div>
 				</div>
 			</div>
+			<div class="step_box_false_bg_after"></div>
 		</div>
 		<div class="info_footer">
 			<button class="info_back" @click="backFn()">返回上一页</button>
-			<button class="info_submit" v-if="type === '2'" @click="toStepPageFn()">下一页</button>
-			<button class="info_submit" v-else @click="submitFn()">保存并转至下一页</button>
+			<button class="info_submit" @click="submitFn()">保存并转至下一页</button>
 		</div>
 	</div>
 </template>
@@ -65,6 +68,7 @@ const { hospital_id, step, type, city, id } = route.query
 const router = useRouter()
 const azBox = ref<HTMLElement | null>(null)
 const conxBox = ref<HTMLElement | null>(null)
+const lianmengBox = ref<HTMLElement | null>(null)
 
 const backFn = () => {
 	router.push({
@@ -172,23 +176,20 @@ const { lianmeng, az_lianxi, az_zhiyuan, conx_lianxi, conx_zhiyuan } = {
 const showBoxFn = () => {
 	//如果是联盟
 	if (type === '2') {
-		if (azBox.value) {
-			azBox.value.className = 'step_box step_box_false step_box_false_bg'
-		}
-		if (conxBox.value) {
-			conxBox.value.className = 'step_box step_box_false step_box_false_bg'
+		if (lianmengBox.value) {
+			lianmengBox.value.className = 'step_box'
 		}
 	}
 	//如果是红方
 	if (type === '1') {
-		if (conxBox.value) {
-			conxBox.value.className = 'step_box step_box_false step_box_false_bg'
+		if (azBox.value) {
+			azBox.value.className = 'step_box mt35'
 		}
 	}
 	//如果是康乃心
 	if (type === '3') {
-		if (azBox.value) {
-			azBox.value.className = 'step_box step_box_false step_box_false_bg'
+		if (conxBox.value) {
+			conxBox.value.className = 'step_box mt35'
 		}
 	}
 }

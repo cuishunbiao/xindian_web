@@ -1,6 +1,6 @@
 <template>
 	<h2>阶段2：院内流程</h2>
-	<div ref="stepBoxLianmeng" class="step_box">
+	<div v-if="type === '1' || type === '2'" ref="stepBoxLianmeng" class="step_box">
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">是否已临床提单</div>
@@ -44,21 +44,22 @@
 				<div class="step_box_left step_box_left_label">时间</div>
 				<div class="step_box_right width80">
 					<div ref="shanghuiTime" id="shanghuiTime" class="select-tab-bg">
-						{{ stepData.az_2_shanghui_time }}
+						{{ az_2_shanghui_time }}
 					</div>
 				</div>
 			</div>
 			<div class="step_box_content_flex">
 				<div class="step_box_left step_box_left_label">结果</div>
 				<div class="step_box_right">
-					<input type="text" v-model="stepData.az_2_shanghui_jieguo" placeholder="请输入结果" />
+					<input type="text" v-model="az_2_shanghui_jieguo" placeholder="请输入结果" />
 				</div>
 			</div>
 		</div>
+		<div class="step_box_false_bg_after"></div>
 	</div>
-	<template v-if="type === '1'">
-		<h4 class="mt35">红方</h4>
-		<div ref="stepBoxAZZhaobiao" class="step_box mt20">
+	<template v-if="type === '2' || type === '1'">
+		<h2 class="mt35">红方</h2>
+		<div ref="stepBoxAZzhaobiao" class="step_box mt20">
 			<div class="step_box_content">
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left">是否需要招标</div>
@@ -70,46 +71,47 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div ref="stepBoxCONX" v-show="stepData.az_2_zhaobiao === '是'" class="step_box mt35">
-			<div class="step_box_content">
-				<div class="step_box_content_flex border borderBottom">
-					<div class="step_box_left">招标材料是否准备就绪</div>
-					<div class="step_box_right">
-						<label class="step_label"
-							><input type="radio" value="是" v-model="az_2_zhaobiao_zhunbei" />是&nbsp;&nbsp;</label
-						>
-						<label class="step_label"
-							><input type="radio" value="否" v-model="az_2_zhaobiao_zhunbei" />否</label
-						>
-					</div>
-				</div>
-			</div>
-			<div class="step_box_content">
-				<div class="step_box_content_flex border borderBottom">
-					<div class="step_box_left">招投标</div>
-				</div>
-				<div class="step_box_content_flex border borderBottom">
-					<div class="step_box_left step_box_left_label">时间</div>
-					<div class="step_box_right width80">
-						<div ref="zhaobiaoTime" id="zhaobiaoTime" class="select-tab-bg">
-							{{ az_2_zhaobiao_shijian }}
+			<div v-show="stepData.az_2_zhaobiao === '是'">
+				<div class="step_box_content">
+					<div class="step_box_content_flex border borderBottom">
+						<div class="step_box_left">招标材料是否准备就绪</div>
+						<div class="step_box_right">
+							<label class="step_label"
+								><input type="radio" value="是" v-model="az_2_zhaobiao_zhunbei" />是&nbsp;&nbsp;</label
+							>
+							<label class="step_label"
+								><input type="radio" value="否" v-model="az_2_zhaobiao_zhunbei" />否</label
+							>
 						</div>
 					</div>
 				</div>
-				<div class="step_box_content_flex">
-					<div class="step_box_left step_box_left_label">结果</div>
-					<div class="step_box_right">
-						<input type="text" v-model="az_2_zhaobiao_jieguo" placeholder="请输入结果" />
+				<div class="step_box_content">
+					<div class="step_box_content_flex border borderBottom">
+						<div class="step_box_left">招投标</div>
+					</div>
+					<div class="step_box_content_flex border borderBottom">
+						<div class="step_box_left step_box_left_label">时间</div>
+						<div class="step_box_right width80">
+							<div ref="azzhaobiaoTime" id="azzhaobiaoTime" class="select-tab-bg">
+								{{ az_2_zhaobiao_shijian }}
+							</div>
+						</div>
+					</div>
+					<div class="step_box_content_flex">
+						<div class="step_box_left step_box_left_label">结果</div>
+						<div class="step_box_right">
+							<input type="text" v-model="az_2_zhaobiao_jieguo" placeholder="请输入结果" />
+						</div>
 					</div>
 				</div>
 			</div>
+			<div class="step_box_false_bg_after"></div>
 		</div>
 	</template>
 	<!-- CONX -->
-	<template v-if="type === '3'">
-		<h4 class="mt35">康乃心</h4>
-		<div ref="stepBoxCONXZhaobiao" class="step_box">
+	<template v-if="type === '2' || type === '3'">
+		<h2 class="mt35">康乃心</h2>
+		<div ref="stepBoxCONXzhaobiao" class="step_box">
 			<div class="step_box_content">
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left">是否需要招标</div>
@@ -121,43 +123,47 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div ref="stepBoxCONX" v-show="stepData.conx_2_zhaobiao === '是'" class="step_box mt35">
-			<div class="step_box_content">
-				<div class="step_box_content_flex border borderBottom">
-					<div class="step_box_left">招标材料是否准备就绪</div>
-					<div class="step_box_right">
-						<label class="step_label"
-							><input type="radio" value="是" v-model="conx_2_zhaobiao_zhunbei" />是&nbsp;&nbsp;</label
-						>
-						<label class="step_label"
-							><input type="radio" value="否" v-model="conx_2_zhaobiao_zhunbei" />否</label
-						>
-					</div>
-				</div>
-			</div>
-			<div class="step_box_content">
-				<div class="step_box_content_flex border borderBottom">
-					<div class="step_box_left">招投标</div>
-				</div>
-				<div class="step_box_content_flex border borderBottom">
-					<div class="step_box_left step_box_left_label">时间</div>
-					<div class="step_box_right width80">
-						<div ref="zhaobiaoTime" id="zhaobiaoTime" class="select-tab-bg">
-							{{ conx_2_zhaobiao_shijian }}
+			<div v-show="stepData.conx_2_zhaobiao === '是'">
+				<div class="step_box_content">
+					<div class="step_box_content_flex border borderBottom">
+						<div class="step_box_left">招标材料是否准备就绪</div>
+						<div class="step_box_right">
+							<label class="step_label"
+								><input
+									type="radio"
+									value="是"
+									v-model="conx_2_zhaobiao_zhunbei"
+								/>是&nbsp;&nbsp;</label
+							>
+							<label class="step_label"
+								><input type="radio" value="否" v-model="conx_2_zhaobiao_zhunbei" />否</label
+							>
 						</div>
 					</div>
 				</div>
-				<div class="step_box_content_flex">
-					<div class="step_box_left step_box_left_label">结果</div>
-					<div class="step_box_right">
-						<input type="text" v-model="conx_2_zhaobiao_jieguo" placeholder="请输入结果" />
+				<div class="step_box_content">
+					<div class="step_box_content_flex border borderBottom">
+						<div class="step_box_left">招投标</div>
+					</div>
+					<div class="step_box_content_flex border borderBottom">
+						<div class="step_box_left step_box_left_label">时间</div>
+						<div class="step_box_right width80">
+							<div ref="conxzhaobiaoTime" id="conxzhaobiaoTime" class="select-tab-bg">
+								{{ conx_2_zhaobiao_shijian }}
+							</div>
+						</div>
+					</div>
+					<div class="step_box_content_flex">
+						<div class="step_box_left step_box_left_label">结果</div>
+						<div class="step_box_right">
+							<input type="text" v-model="conx_2_zhaobiao_jieguo" placeholder="请输入结果" />
+						</div>
 					</div>
 				</div>
 			</div>
+			<div class="step_box_false_bg_after"></div>
 		</div>
 	</template>
-
 	<div class="info_footer">
 		<button class="info_back" @click="backFn()">上一步阶段1</button>
 		<button class="info_submit" @click="submitFn">保存并转至下一页</button>
@@ -173,10 +179,13 @@ const shanghuiTime = ref<HTMLElement | null>(null)
 const router = useRouter()
 const route = useRoute()
 const { type, hospital_id, step, city } = route.query
-const stepBoxAZ = ref<HTMLElement | null>(null)
-const stepBoxCONX = ref<HTMLElement | null>(null)
-const stepBoxAZZhaobiao = ref<HTMLElement | null>(null)
-const stepBoxCONXZhaobiao = ref<HTMLElement | null>(null)
+const stepBoxAZcailiao = ref<HTMLElement | null>(null)
+const stepBoxCONXcailiao = ref<HTMLElement | null>(null)
+const stepBoxAZzhaobiao = ref<HTMLElement | null>(null)
+const stepBoxCONXzhaobiao = ref<HTMLElement | null>(null)
+const stepBoxLianmeng = ref<HTMLElement | null>(null)
+const azzhaobiaoTime = ref<HTMLElement | null>(null)
+const conxzhaobiaoTime = ref<HTMLElement | null>(null)
 
 const backFn = () => {
 	const { type } = route.query
@@ -230,8 +239,21 @@ const selectTimeFn = () => {
 	let month = myDate.getMonth()
 	let date = myDate.getDate() - 1
 	//选择开始时间
-	const zhaobiao = new MobileSelect({
-		trigger: '#zhaobiaoTime',
+	const azzhaobiaoTimeMobile = new MobileSelect({
+		trigger: '#azzhaobiaoTime',
+		selectType: 'ymd',
+		selectCla: 'start',
+		wheels: [{ data: YEARNUM }, { data: MONTHNUM }, { data: DAYNUM }],
+		position: [year, month, date],
+		callback: function (indexArr: Number, data: any) {
+			const time = `${data[0]}-${data[1]}-${data[2]}`
+			stepData.az_2_zhaobiao_shijian = time
+		}
+	})
+
+	//选择开始时间
+	const conxzhaobiaoTimeMobile = new MobileSelect({
+		trigger: '#conxzhaobiaoTime',
 		selectType: 'ymd',
 		selectCla: 'start',
 		wheels: [{ data: YEARNUM }, { data: MONTHNUM }, { data: DAYNUM }],
@@ -271,22 +293,20 @@ const selectTimeFn = () => {
 const showBoxFn = () => {
 	//如果是联盟，AZ和CONX 只能看，不能写
 	if (type === '2') {
-		if (stepBoxAZ.value) {
-			stepBoxAZ.value.className = 'step_box step_box_false step_box_false_bg'
+		if (stepBoxAZzhaobiao.value) {
+			stepBoxAZzhaobiao.value.className = 'step_box step_box_false step_box_false_bg'
 		}
-		if (stepBoxCONX.value) {
-			stepBoxCONX.value.className = 'step_box step_box_false step_box_false_bg'
+		if (stepBoxAZcailiao.value) {
+			stepBoxAZcailiao.value.className = 'step_box step_box_false step_box_false_bg'
 		}
-		if (stepBoxAZZhaobiao.value) {
-			stepBoxAZZhaobiao.value.className = 'step_box step_box_false step_box_false_bg'
+		if (stepBoxCONXzhaobiao.value) {
+			stepBoxCONXzhaobiao.value.className = 'step_box step_box_false step_box_false_bg'
 		}
-		if (stepBoxCONXZhaobiao.value) {
-			stepBoxCONXZhaobiao.value.className = 'step_box step_box_false step_box_false_bg'
+		if (stepBoxCONXcailiao.value) {
+			stepBoxCONXcailiao.value.className = 'step_box step_box_false step_box_false_bg'
 		}
-	}
-	if (type === '3') {
-		if (stepBoxAZ.value) {
-			stepBoxAZ.value.className = 'step_box step_box_false step_box_false_bg'
+		if (stepBoxLianmeng.value) {
+			stepBoxLianmeng.value.className = 'step_box step_box_false step_box_false_bg'
 		}
 	}
 }

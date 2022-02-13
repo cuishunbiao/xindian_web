@@ -37,7 +37,7 @@ const errorFn = (text: string) => {
 	setTimeout(() => {
 		const errorDom: any = document.getElementById('error-container')
 		document.body.removeChild(errorDom)
-	}, 2500)
+	}, 1800)
 }
 
 export { YEARNUM, MONTHNUM, DAYNUM, HOUR, MINUTER, errorFn }

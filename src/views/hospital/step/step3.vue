@@ -38,6 +38,7 @@
 					</div>
 				</div>
 			</div>
+			<div class="step_box_false_bg_after"></div>
 		</div>
 	</div>
 	<div v-if="type === '3' || type === '2'">
@@ -79,6 +80,7 @@
 					</div>
 				</div>
 			</div>
+			<div class="step_box_false_bg_after"></div>
 		</div>
 	</div>
 	<div class="info_footer">

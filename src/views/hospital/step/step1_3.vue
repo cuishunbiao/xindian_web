@@ -4,26 +4,15 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">联盟是否已通知医院</div>
-				<div class="step_box_right">
-					<label class="step_label"
-						><input type="radio" value="是" v-model="lianmeng_1_tz_status" />是&nbsp;&nbsp;</label
-					>
-					<label class="step_label"><input type="radio" value="否" v-model="lianmeng_1_tz_status" />否</label>
-				</div>
+				<div class="step_box_right">{{ lianmeng_1_tz_status }}</div>
 			</div>
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left step_box_left_label">形式</div>
-				<div class="step_box_right">
-					<input type="text" v-model="stepData.lianmeng_1_tz_type" placeholder="请输入通知形式" />
-				</div>
+				<div class="step_box_right">{{ lianmeng_1_tz_type }}</div>
 			</div>
 			<div class="step_box_content_flex">
 				<div class="step_box_left step_box_left_label">时间</div>
-				<div class="step_box_right width80">
-					<div ref="tongzhiTime" id="tongzhiTime" class="select-tab-bg">
-						{{ stepData.lianmeng_1_tz_time }}
-					</div>
-				</div>
+				<div class="step_box_right width80">{{ lianmeng_1_tz_time }}</div>
 			</div>
 		</div>
 		<div class="step_box_content">
@@ -32,39 +21,23 @@
 			</div>
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left step_box_left_label">姓名</div>
-				<div class="step_box_right">
-					<input type="text" v-model="stepData.lianmeng_1_yuanfang_name" placeholder="请输入姓名" />
-				</div>
+				<div class="step_box_right">{{ stepData.lianmeng_1_yuanfang_name }}</div>
 			</div>
 			<div class="step_box_content_flex">
 				<div class="step_box_left step_box_left_label">职位</div>
-				<div class="step_box_right">
-					<input type="text" v-model="stepData.lianmeng_1_yuanfang_zhiwei" placeholder="请输入职位" />
-				</div>
+				<div class="step_box_right">{{ stepData.lianmeng_1_yuanfang_zhiwei }}</div>
 			</div>
 		</div>
 		<div class="step_box_content paddingB30">
 			<div class="step_box_content_flex">
 				<div class="step_box_left">院方反馈联盟信息</div>
 			</div>
-			<div class="step_box_content_flex border borderAll">
-				<textarea
-					cols="30"
-					rows="5"
-					v-model="lianmeng_1_yuanfang_fankui"
-					placeholder="请输入院方反馈"
-				></textarea>
-			</div>
+			<div class="step_box_content_flex border borderAll">{{ lianmeng_1_yuanfang_fankui }}</div>
 		</div>
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
-				<div class="step_box_left">医院是否已在联盟官网提交报名</div>
-				<div class="step_box_right">
-					<label class="step_label"
-						><input type="radio" value="是" v-model="lianmeng_1_baoming" />是&nbsp;&nbsp;</label
-					>
-					<label class="step_label"><input type="radio" value="否" v-model="lianmeng_1_baoming" />否</label>
-				</div>
+				<div class="step_box_left">医院是否已在联盟官网报名</div>
+				<div class="step_box_right">{{ lianmeng_1_baoming }}</div>
 			</div>
 		</div>
 	</div>
@@ -203,6 +176,8 @@ const submitFn = () => {
 const {
 	lianmeng_1_tz_status,
 	lianmeng_1_baoming,
+	lianmeng_1_tz_type,
+	lianmeng_1_tz_time,
 	lianmeng_1_yuanfang_fankui,
 	conx_1_xiangxi_fangan,
 	conx_1_xiangxi_fankui,

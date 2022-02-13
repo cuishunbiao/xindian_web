@@ -58,7 +58,7 @@
 		</div>
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
-				<div class="step_box_left">医院是否已在联盟官网提交报名</div>
+				<div class="step_box_left">医院是否已在联盟官网报名</div>
 				<div class="step_box_right">
 					<label class="step_label"
 						><input type="radio" value="是" v-model="lianmeng_1_baoming" />是&nbsp;&nbsp;</label
@@ -118,6 +118,7 @@
 				<div class="step_box_right">{{ az_1_xiangxi_queren }}</div>
 			</div>
 		</div>
+		<div class="step_box_false_bg_after"></div>
 	</div>
 	<div class="step_box step_box_false mt35">
 		<div class="step_box_content">
