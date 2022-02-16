@@ -41,6 +41,79 @@
 			</div>
 		</div>
 	</div>
+	<!-- AZ -->
+	<h2 class="mt35">红方</h2>
+	<div class="step_box step_box_false mt35">
+		<div class="step_box_content">
+			<div class="step_box_content_flex">
+				<div class="step_box_left">红方是否已给院方初步介绍方案</div>
+				<div class="step_box_right">{{ az_1_fangan }}</div>
+			</div>
+		</div>
+		<div class="step_box_content">
+			<div class="step_box_content_flex border borderBottom">
+				<div class="step_box_left">院方联系人</div>
+			</div>
+			<div class="step_box_content_flex border borderBottom">
+				<div class="step_box_left step_box_left_label">姓名</div>
+				<div class="step_box_right">{{ stepData.az_1_yuanfang_name }}</div>
+			</div>
+			<div class="step_box_content_flex">
+				<div class="step_box_left step_box_left_label">职位</div>
+				<div class="step_box_right">{{ stepData.az_1_yuanfang_zhiwei }}</div>
+			</div>
+		</div>
+		<div class="step_box_content paddingB30">
+			<div class="step_box_content_flex">
+				<div class="step_box_left">院方反馈</div>
+			</div>
+			<div class="step_box_content_flex">
+				{{ az_1_yuanfang_fankui }}
+			</div>
+		</div>
+	</div>
+	<div ref="stepBoxAZCONX" class="step_box step_box_false step_box_false_bg mt35">
+		<div class="step_box_content">
+			<div class="step_box_content_flex">
+				<div class="step_box_left">康乃心是否已对接院方详细介绍方案</div>
+				<div class="step_box_right">
+					<label class="step_label"
+						><input type="radio" value="是" v-model="az_1_xiangxi_fangan" />是&nbsp;&nbsp;</label
+					>
+					<label class="step_label"><input type="radio" value="否" v-model="az_1_xiangxi_fangan" />否</label>
+				</div>
+			</div>
+			<div class="step_box_content_flex">
+				<div class="step_box_left step_box_left_label">康乃心详细介绍方案日期</div>
+				<div class="step_box_right">
+					<div ref="xiangxifanganTime" id="xiangxifanganTime" class="select-tab-bg">
+						{{ stepData.az_1_xiangxi_fangan_time }}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="step_box_content paddingB30">
+			<div class="step_box_content_flex">
+				<div class="step_box_left">院方反馈（尽可能详述）</div>
+			</div>
+			<div class="step_box_content_flex border borderAll">
+				<textarea cols="30" rows="5" v-model="az_1_xiangxi_fankui" placeholder="请输入院方反馈"></textarea>
+			</div>
+		</div>
+		<div class="step_box_content">
+			<div class="step_box_content_flex">
+				<div class="step_box_left">是否已确认方案</div>
+				<div class="step_box_right">
+					<label class="step_label"
+						><input type="radio" value="是" v-model="az_1_xiangxi_queren" />是&nbsp;&nbsp;</label
+					>
+					<label class="step_label"><input type="radio" value="否" v-model="az_1_xiangxi_queren" />否</label>
+				</div>
+			</div>
+		</div>
+		<div class="step_box_false_bg_after"></div>
+	</div>
+	<h2 class="mt35">康乃心</h2>
 	<div class="step_box mt35">
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
@@ -119,6 +192,14 @@ interface stepDataTS {
 	lianmeng_1_yuanfang_zhiwei: String
 	lianmeng_1_yuanfang_fankui: any
 	lianmeng_1_baoming: String
+	az_1_fangan: String
+	az_1_yuanfang_name: String
+	az_1_yuanfang_zhiwei: String
+	az_1_yuanfang_fankui: any
+	az_1_xiangxi_fangan: String
+	az_1_xiangxi_fankui: String
+	az_1_xiangxi_queren: String
+	az_1_xiangxi_fangan_time: String
 	conx_1_xiangxi_fangan: String
 	conx_1_xiangxi_fankui: any
 	conx_1_xiangxi_queren: String
@@ -133,6 +214,14 @@ let stepData = reactive<stepDataTS>({
 	lianmeng_1_yuanfang_zhiwei: '',
 	lianmeng_1_yuanfang_fankui: '',
 	lianmeng_1_baoming: '',
+	az_1_fangan: '',
+	az_1_yuanfang_name: '',
+	az_1_yuanfang_zhiwei: '',
+	az_1_yuanfang_fankui: '',
+	az_1_xiangxi_fangan: '',
+	az_1_xiangxi_fangan_time: '',
+	az_1_xiangxi_fankui: '',
+	az_1_xiangxi_queren: '',
 	conx_1_xiangxi_fangan: '',
 	conx_1_xiangxi_fankui: '',
 	conx_1_xiangxi_queren: '',
@@ -145,6 +234,9 @@ getStepApi({
 }).then((res: any) => {
 	if (res.status === 1) {
 		stepData = Object.assign(stepData, res.data.step_info[Number(step)])
+		if (stepData.conx_1_xiangxi_fangan_time === '') {
+			stepData.conx_1_xiangxi_fangan_time = '点击选择日期'
+		}
 	} else {
 		errorFn(res.msg)
 	}
@@ -182,7 +274,11 @@ const {
 	conx_1_xiangxi_fangan,
 	conx_1_xiangxi_fankui,
 	conx_1_xiangxi_queren,
-	conx_1_xiangxi_fangan_time
+	az_1_fangan,
+	az_1_yuanfang_fankui,
+	az_1_xiangxi_fangan,
+	az_1_xiangxi_fankui,
+	az_1_xiangxi_queren
 } = {
 	...toRefs(stepData)
 }

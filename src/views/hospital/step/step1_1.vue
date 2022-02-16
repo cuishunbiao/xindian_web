@@ -1,6 +1,6 @@
 <template>
 	<h2>阶段1：医院接洽</h2>
-	<div class="step_box step_box_false">
+	<div class="step_box step_box_false step_box_false_bg">
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">联盟是否已通知医院</div>
@@ -40,9 +40,11 @@
 				<div class="step_box_right">{{ lianmeng_1_baoming }}</div>
 			</div>
 		</div>
+		<div class="step_box_false_bg_after"></div>
 	</div>
 	<!-- AZ -->
-	<div class="step_box mt35">
+	<h2 class="mt35">红方</h2>
+	<div ref="stepBoxAZ" class="step_box step_box_false step_box_false_bg">
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">红方是否已给院方初步介绍方案</div>
@@ -87,9 +89,9 @@
 				<textarea cols="30" rows="5" v-model="az_1_yuanfang_fankui" placeholder="请输入院方反馈"></textarea>
 			</div>
 		</div>
+		<div class="step_box_false_bg_after"></div>
 	</div>
-	<!-- AZ 和 CONX -->
-	<div class="step_box mt35" v-show="az_1_fangan === '是'">
+	<div ref="stepBoxAZCONX" class="step_box step_box_false step_box_false_bg mt35">
 		<div class="step_box_content">
 			<div class="step_box_content_flex">
 				<div class="step_box_left">康乃心是否已对接院方详细介绍方案</div>
@@ -128,6 +130,54 @@
 				</div>
 			</div>
 		</div>
+		<div class="step_box_false_bg_after"></div>
+	</div>
+	<!-- AZ 和 CONX -->
+	<h2 class="mt35">康乃心</h2>
+	<div ref="stepBoxCONX" class="step_box step_box_false step_box_false_bg mt35">
+		<div class="step_box_content">
+			<div class="step_box_content_flex">
+				<div class="step_box_left">康乃心是否已对接院方详细介绍方案</div>
+				<div class="step_box_right">
+					<label class="step_label"
+						><input type="radio" value="是" v-model="conx_1_xiangxi_fangan" />是&nbsp;&nbsp;</label
+					>
+					<label class="step_label"
+						><input type="radio" value="否" v-model="conx_1_xiangxi_fangan" />否</label
+					>
+				</div>
+			</div>
+			<div class="step_box_content_flex">
+				<div class="step_box_left step_box_left_label">康乃心详细介绍方案日期</div>
+				<div class="step_box_right">
+					<div ref="xiangxifanganTime" id="xiangxifanganTime" class="select-tab-bg">
+						{{ stepData.conx_1_xiangxi_fangan_time }}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="step_box_content paddingB30">
+			<div class="step_box_content_flex">
+				<div class="step_box_left">院方反馈（尽可能详述）</div>
+			</div>
+			<div class="step_box_content_flex border borderAll">
+				<textarea cols="30" rows="5" v-model="conx_1_xiangxi_fankui" placeholder="请输入院方反馈"></textarea>
+			</div>
+		</div>
+		<div class="step_box_content">
+			<div class="step_box_content_flex">
+				<div class="step_box_left">是否已确认方案</div>
+				<div class="step_box_right">
+					<label class="step_label"
+						><input type="radio" value="是" v-model="conx_1_xiangxi_queren" />是&nbsp;&nbsp;</label
+					>
+					<label class="step_label"
+						><input type="radio" value="否" v-model="conx_1_xiangxi_queren" />否</label
+					>
+				</div>
+			</div>
+		</div>
+		<div class="step_box_false_bg_after"></div>
 	</div>
 	<div class="info_footer">
 		<button class="info_back" @click="backFn()">返回上一页</button>
@@ -144,6 +194,9 @@ const route = useRoute()
 const { hospital_id, step, type, city } = route.query
 const router = useRouter()
 const fanganTime = ref<HTMLElement | null>(null)
+const stepBoxAZ = ref<HTMLElement | null>(null)
+const stepBoxCONX = ref<HTMLElement | null>(null)
+const stepBoxAZCONX = ref<HTMLElement | null>(null)
 
 const backFn = () => {
 	router.push({
@@ -172,6 +225,10 @@ interface stepDataTS {
 	az_1_xiangxi_fankui: any
 	az_1_xiangxi_queren: String
 	az_1_xiangxi_fangan_time: String
+	conx_1_xiangxi_fangan: String
+	conx_1_xiangxi_fangan_time: String
+	conx_1_xiangxi_fankui: String
+	conx_1_xiangxi_queren: String
 }
 
 let stepData = reactive<stepDataTS>({
@@ -190,7 +247,11 @@ let stepData = reactive<stepDataTS>({
 	az_1_xiangxi_fangan: '',
 	az_1_xiangxi_fankui: '',
 	az_1_xiangxi_queren: '',
-	az_1_xiangxi_fangan_time: ''
+	az_1_xiangxi_fangan_time: '',
+	conx_1_xiangxi_fangan: '',
+	conx_1_xiangxi_fangan_time: '',
+	conx_1_xiangxi_fankui: '',
+	conx_1_xiangxi_queren: ''
 })
 
 //判断当前医院在第几步
@@ -199,6 +260,12 @@ getStepApi({
 }).then((res: any) => {
 	if (res.status === 1) {
 		stepData = Object.assign(stepData, res.data.step_info[Number(step)])
+		if (stepData.az_1_fangan_time === '') {
+			stepData.az_1_fangan_time = '点击选择日期'
+		}
+		if (stepData.az_1_xiangxi_fangan_time === '') {
+			stepData.az_1_xiangxi_fangan_time = '点击选择日期'
+		}
 	} else {
 		errorFn(res.msg)
 	}
@@ -237,7 +304,11 @@ const {
 	az_1_xiangxi_fankui,
 	az_1_xiangxi_queren,
 	az_1_xiangxi_fangan,
-	az_1_fangan
+	az_1_fangan,
+	conx_1_xiangxi_fangan,
+	conx_1_xiangxi_fangan_time,
+	conx_1_xiangxi_fankui,
+	conx_1_xiangxi_queren
 } = {
 	...toRefs(stepData)
 }
@@ -275,7 +346,25 @@ const selectTimeFn = () => {
 	})
 }
 
+//根据类型判断模块显示多少
+const showBoxFn = () => {
+	if (type === '1') {
+		if (stepBoxAZ.value) {
+			stepBoxAZ.value.className = 'step_box mt35'
+		}
+		if (stepBoxAZCONX.value) {
+			stepBoxAZCONX.value.className = 'step_box mt35'
+		}
+	}
+	if (type === '3') {
+		if (stepBoxCONX.value) {
+			stepBoxCONX.value.className = 'step_box'
+		}
+	}
+}
+
 onMounted(() => {
 	selectTimeFn()
+	showBoxFn()
 })
 </script>

@@ -1,37 +1,33 @@
 <template>
-	<div v-if="type === '2'">
-		<h2>阶段4：设备运营</h2>
-		<div class="step_box">
-			<div class="step_box_content">
-				<div class="step_box_content_flex border borderBottom">
-					<div class="step_box_left">数据是否已对接联盟平台</div>
-					<div class="step_box_right">
-						<label class="step_label"
-							><input type="radio" value="是" v-model="lianmeng_4_duijie" />是&nbsp;&nbsp;</label
-						>
-						<label class="step_label"
-							><input type="radio" value="否" v-model="lianmeng_4_duijie" />否</label
-						>
-					</div>
+	<h2>阶段4：设备运营</h2>
+	<div ref="stepBoxLianmeng" class="step_box step_box_false step_box_false_bg">
+		<div class="step_box_content">
+			<div class="step_box_content_flex border borderBottom">
+				<div class="step_box_left">数据是否已对接联盟平台</div>
+				<div class="step_box_right">
+					<label class="step_label"
+						><input type="radio" value="是" v-model="lianmeng_4_duijie" />是&nbsp;&nbsp;</label
+					>
+					<label class="step_label"><input type="radio" value="否" v-model="lianmeng_4_duijie" />否</label>
 				</div>
 			</div>
 		</div>
+		<div class="step_box_false_bg_after"></div>
 	</div>
-	<div v-if="type === '3'">
-		<h2>阶段4：设备运营</h2>
-		<div class="step_box">
-			<div class="step_box_content">
-				<div class="step_box_content_flex border borderBottom">
-					<div class="step_box_left">数据是否已对接联盟平台</div>
-					<div class="step_box_right">
-						<label class="step_label"
-							><input type="radio" value="是" v-model="conx_4_duijie" />是&nbsp;&nbsp;</label
-						>
-						<label class="step_label"><input type="radio" value="否" v-model="conx_4_duijie" />否</label>
-					</div>
+	<h2>阶段4：设备运营</h2>
+	<div ref="stepBoxCONX" class="step_box step_box_false step_box_false_bg">
+		<div class="step_box_content">
+			<div class="step_box_content_flex border borderBottom">
+				<div class="step_box_left">数据是否已对接联盟平台</div>
+				<div class="step_box_right">
+					<label class="step_label"
+						><input type="radio" value="是" v-model="conx_4_duijie" />是&nbsp;&nbsp;</label
+					>
+					<label class="step_label"><input type="radio" value="否" v-model="conx_4_duijie" />否</label>
 				</div>
 			</div>
 		</div>
+		<div class="step_box_false_bg_after"></div>
 	</div>
 	<div class="info_footer">
 		<button class="info_back" @click="backFn()">上一步阶段3</button>
@@ -40,13 +36,16 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, toRefs } from 'vue'
+import { reactive, toRefs, ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { errorFn } from '@Assets/ts/common'
 import { getStepApi, postEditStepApi } from '@Request/api'
 const router = useRouter()
 const route = useRoute()
 const { type, hospital_id, step, city } = route.query
+const stepBoxLianmeng = ref<HTMLElement | null>(null)
+const stepBoxCONX = ref<HTMLElement | null>(null)
+
 // conx_4_duijie
 // lianmeng_4_duijie
 //声明类型
@@ -103,4 +102,20 @@ const submitFn = () => {
 	})
 }
 const { lianmeng_4_duijie, conx_4_duijie } = { ...toRefs(stepData) }
+//根据类型判断模块显示多少
+const showBoxFn = () => {
+	if (type === '2') {
+		if (stepBoxLianmeng.value) {
+			stepBoxLianmeng.value.className = 'step_box'
+		}
+	}
+	if (type === '3') {
+		if (stepBoxCONX.value) {
+			stepBoxCONX.value.className = 'step_box'
+		}
+	}
+}
+onMounted(() => {
+	showBoxFn()
+})
 </script>

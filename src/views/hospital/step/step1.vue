@@ -198,7 +198,7 @@ type stepDataType =
 let stepData = reactive<stepDataTS>({
 	lianmeng_1_tz_status: '否',
 	lianmeng_1_tz_type: '',
-	lianmeng_1_tz_time: '请选择时间',
+	lianmeng_1_tz_time: '点击选择日期',
 	lianmeng_1_yuanfang_name: '',
 	lianmeng_1_yuanfang_zhiwei: '',
 	lianmeng_1_yuanfang_fankui: '',
