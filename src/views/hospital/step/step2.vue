@@ -338,6 +338,12 @@ const submitFn = () => {
 	if (stepData.conx_2_zhaobiao_shijian === '点击选择日期') {
 		stepData.conx_2_zhaobiao_shijian = ''
 	}
+	if (stepData.az_2_zhaobiao_shijian === '点击选择日期') {
+		stepData.az_2_zhaobiao_shijian = ''
+	}
+	if (stepData.az_2_linchuang_tidan_time === '点击选择日期') {
+		stepData.az_2_linchuang_tidan_time = ''
+	}
 
 	postEditStepApi({
 		step,

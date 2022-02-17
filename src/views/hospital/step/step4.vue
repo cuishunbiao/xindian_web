@@ -1,5 +1,5 @@
 <template>
-	<h2>阶段4：设备运营</h2>
+	<h2>联盟 - 阶段4：设备运营</h2>
 	<div ref="stepBoxLianmeng" class="step_box step_box_false step_box_false_bg">
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
@@ -14,7 +14,7 @@
 		</div>
 		<div class="step_box_false_bg_after"></div>
 	</div>
-	<h2>阶段4：设备运营</h2>
+	<h2>康乃心 - 阶段4：设备运营</h2>
 	<div ref="stepBoxCONX" class="step_box step_box_false step_box_false_bg">
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">

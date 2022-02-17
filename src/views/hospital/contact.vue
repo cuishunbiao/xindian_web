@@ -7,8 +7,8 @@
 					<div class="step_box_left">联盟</div>
 				</div>
 				<div class="step_box_content_flex border borderBottom">
-					<div class="step_box_left step_box_left_label">姓名及联系方式</div>
-					<div class="step_box_right step_box_right70">
+					<div class="step_box_left step_box_left_label">负责人(姓名及联系方式)</div>
+					<div class="step_box_right">
 						<input type="text" v-model="lianmeng" placeholder="请输入姓名及联系方式" />
 					</div>
 				</div>
@@ -25,8 +25,8 @@
 					<div class="step_box_right step_box_right70">{{ az_lianxi }}</div>
 				</div> -->
 				<div class="step_box_content_flex">
-					<div class="step_box_left step_box_left_label">姓名及联系方式</div>
-					<div class="step_box_right step_box_right70">
+					<div class="step_box_left step_box_left_label">志愿者(姓名及联系方式)</div>
+					<div class="step_box_right">
 						<input type="text" v-model="az_zhiyuan" placeholder="请输入姓名及联系方式" />
 					</div>
 				</div>
@@ -43,8 +43,8 @@
 					<div class="step_box_right step_box_right70">{{ conx_lianxi }}</div>
 				</div> -->
 				<div class="step_box_content_flex">
-					<div class="step_box_left step_box_left_label">姓名及联系方式</div>
-					<div class="step_box_right step_box_right70">
+					<div class="step_box_left step_box_left_label">志愿者(姓名及联系方式)</div>
+					<div class="step_box_right">
 						<input type="text" v-model="conx_zhiyuan" placeholder="请输入姓名及联系方式" />
 					</div>
 				</div>

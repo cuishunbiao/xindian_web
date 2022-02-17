@@ -274,6 +274,12 @@ getStepApi({
 //提交数据
 const submitFn = () => {
 	//根据当前页面来判断是哪个阶段
+	if (stepData.az_1_fangan_time === '点击选择日期') {
+		stepData.az_1_fangan_time = ''
+	}
+	if (stepData.az_1_xiangxi_fangan_time === '点击选择日期') {
+		stepData.az_1_xiangxi_fangan_time = ''
+	}
 	postEditStepApi({
 		step,
 		hospital_id,

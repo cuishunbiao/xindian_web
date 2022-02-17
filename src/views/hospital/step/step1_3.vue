@@ -86,7 +86,7 @@
 			<div class="step_box_content_flex">
 				<div class="step_box_left step_box_left_label">康乃心详细介绍方案日期</div>
 				<div class="step_box_right">
-					<div ref="xiangxifanganTime" id="xiangxifanganTime" class="select-tab-bg">
+					<div ref="azXiangxifanganTime" id="azXiangxifanganTime" class="select-tab-bg">
 						{{ stepData.az_1_xiangxi_fangan_time }}
 					</div>
 				</div>
@@ -130,7 +130,7 @@
 			<div class="step_box_content_flex">
 				<div class="step_box_left step_box_left_label">时间</div>
 				<div class="step_box_right width80">
-					<div ref="xiangxifanganTime" id="xiangxifanganTime" class="select-tab-bg">
+					<div ref="conxXiangxifanganTime" id="conxXiangxifanganTime" class="select-tab-bg">
 						{{ stepData.conx_1_xiangxi_fangan_time }}
 					</div>
 				</div>
@@ -245,6 +245,9 @@ getStepApi({
 //提交数据
 const submitFn = () => {
 	//根据当前页面来判断是哪个阶段
+	if (stepData.conx_1_xiangxi_fangan_time === '点击选择日期') {
+		stepData.conx_1_xiangxi_fangan_time = ''
+	}
 	postEditStepApi({
 		step,
 		hospital_id,
@@ -291,7 +294,7 @@ const selectTimeFn = () => {
 	let date = myDate.getDate() - 1
 	//选择开始时间
 	const zhaobiao = new MobileSelect({
-		trigger: '#xiangxifanganTime',
+		trigger: '#conxXiangxifanganTime',
 		selectType: 'ymd',
 		selectCla: 'start',
 		wheels: [{ data: YEARNUM }, { data: MONTHNUM }, { data: DAYNUM }],
