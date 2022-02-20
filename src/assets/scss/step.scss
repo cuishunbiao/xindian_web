@@ -80,7 +80,18 @@ h2 {
 		position: relative;
 		z-index: 1;
 	}
+	.step_box_red {
+		color: #b62940;
+		&::placeholder {
+			color: #b62940;
+		}
+	}
 }
+.step_box_red input::placeholder,
+.step_box_red textarea::-webkit-input-placeholder {
+	color: #b62940;
+}
+
 .icon_boolean {
 	width: 1.81rem;
 	height: 0.64rem;
@@ -129,9 +140,18 @@ h2 {
 		direction: rtl;
 	}
 }
-
 .step_box_false_bg {
 	position: relative;
+	.step_box_red {
+		color: #666;
+		.select-tab-bg {
+			color: #666;
+		}
+	}
+	input::placeholder,
+	textarea::-webkit-input-placeholder {
+		color: #666;
+	}
 }
 .step_box_false_bg .step_box_false_bg_after {
 	position: absolute;
@@ -171,4 +191,7 @@ h2 {
 		vertical-align: middle;
 		margin-top: -2px;
 	}
+}
+.color_red {
+	color: #b62940;
 }

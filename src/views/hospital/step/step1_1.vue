@@ -48,7 +48,7 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">红方是否已给院方初步介绍方案</div>
-				<div class="step_box_right">
+				<div class="step_box_right" :class="{ step_box_red: !az_1_fangan.length }">
 					<label class="step_label"
 						><input type="radio" value="是" v-model="az_1_fangan" />是&nbsp;&nbsp;</label
 					>
@@ -58,8 +58,13 @@
 			<div class="step_box_content_flex">
 				<div class="step_box_left step_box_left_label">初步介绍方案日期</div>
 				<div class="step_box_right">
-					<div ref="fanganTime" id="fanganTime" class="select-tab-bg">
-						{{ stepData.az_1_fangan_time }}
+					<div
+						ref="fanganTime"
+						id="fanganTime"
+						class="select-tab-bg"
+						:class="{ step_box_red: az_1_fangan_time === '点击选择日期' }"
+					>
+						{{ az_1_fangan_time }}
 					</div>
 				</div>
 			</div>
@@ -70,14 +75,14 @@
 			</div>
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left step_box_left_label">姓名</div>
-				<div class="step_box_right">
-					<input type="text" v-model="stepData.az_1_yuanfang_name" placeholder="请输入姓名" />
+				<div class="step_box_right" :class="{ step_box_red: !az_1_yuanfang_name.length }">
+					<input type="text" v-model="az_1_yuanfang_name" placeholder="请输入姓名" />
 				</div>
 			</div>
 			<div class="step_box_content_flex">
 				<div class="step_box_left step_box_left_label">职位</div>
-				<div class="step_box_right">
-					<input type="text" v-model="stepData.az_1_yuanfang_zhiwei" placeholder="请输入职位" />
+				<div class="step_box_right" :class="{ step_box_red: !az_1_yuanfang_name.length }">
+					<input type="text" v-model="az_1_yuanfang_zhiwei" placeholder="请输入职位" />
 				</div>
 			</div>
 		</div>
@@ -85,7 +90,7 @@
 			<div class="step_box_content_flex">
 				<div class="step_box_left">院方反馈</div>
 			</div>
-			<div class="step_box_content_flex border borderAll">
+			<div class="step_box_content_flex border borderAll" :class="{ step_box_red: !az_1_yuanfang_fankui.length }">
 				<textarea cols="30" rows="5" v-model="az_1_yuanfang_fankui" placeholder="请输入院方反馈"></textarea>
 			</div>
 		</div>
@@ -95,7 +100,7 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex">
 				<div class="step_box_left">康乃心是否已对接院方详细介绍方案</div>
-				<div class="step_box_right">
+				<div class="step_box_right" :class="{ step_box_red: !az_1_xiangxi_fangan.length }">
 					<label class="step_label"
 						><input type="radio" value="是" v-model="az_1_xiangxi_fangan" />是&nbsp;&nbsp;</label
 					>
@@ -105,7 +110,12 @@
 			<div class="step_box_content_flex">
 				<div class="step_box_left step_box_left_label">康乃心详细介绍方案日期</div>
 				<div class="step_box_right">
-					<div ref="xiangxifanganTime" id="xiangxifanganTime" class="select-tab-bg">
+					<div
+						ref="xiangxifanganTime"
+						id="xiangxifanganTime"
+						class="select-tab-bg"
+						:class="{ step_box_red: stepData.az_1_xiangxi_fangan_time === '点击选择日期' }"
+					>
 						{{ stepData.az_1_xiangxi_fangan_time }}
 					</div>
 				</div>
@@ -115,14 +125,14 @@
 			<div class="step_box_content_flex">
 				<div class="step_box_left">院方反馈（尽可能详述）</div>
 			</div>
-			<div class="step_box_content_flex border borderAll">
+			<div class="step_box_content_flex border borderAll" :class="{ step_box_red: !az_1_xiangxi_fankui.length }">
 				<textarea cols="30" rows="5" v-model="az_1_xiangxi_fankui" placeholder="请输入院方反馈"></textarea>
 			</div>
 		</div>
 		<div class="step_box_content">
 			<div class="step_box_content_flex">
 				<div class="step_box_left">是否已确认方案</div>
-				<div class="step_box_right">
+				<div class="step_box_right" :class="{ step_box_red: !az_1_xiangxi_queren.length }">
 					<label class="step_label"
 						><input type="radio" value="是" v-model="az_1_xiangxi_queren" />是&nbsp;&nbsp;</label
 					>
@@ -314,7 +324,10 @@ const {
 	conx_1_xiangxi_fangan,
 	conx_1_xiangxi_fangan_time,
 	conx_1_xiangxi_fankui,
-	conx_1_xiangxi_queren
+	conx_1_xiangxi_queren,
+	az_1_fangan_time,
+	az_1_yuanfang_name,
+	az_1_yuanfang_zhiwei
 } = {
 	...toRefs(stepData)
 }

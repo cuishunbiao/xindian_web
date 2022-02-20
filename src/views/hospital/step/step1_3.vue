@@ -118,7 +118,7 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">康乃心是否已对接院方详细介绍方案</div>
-				<div class="step_box_right">
+				<div class="step_box_right" :class="{ step_box_red: !conx_1_xiangxi_fangan.length }">
 					<label class="step_label"
 						><input type="radio" value="是" v-model="conx_1_xiangxi_fangan" />是&nbsp;&nbsp;</label
 					>
@@ -130,7 +130,12 @@
 			<div class="step_box_content_flex">
 				<div class="step_box_left step_box_left_label">时间</div>
 				<div class="step_box_right width80">
-					<div ref="conxXiangxifanganTime" id="conxXiangxifanganTime" class="select-tab-bg">
+					<div
+						ref="conxXiangxifanganTime"
+						id="conxXiangxifanganTime"
+						class="select-tab-bg"
+						:class="{ step_box_red: stepData.conx_1_xiangxi_fangan_time === '点击选择日期' }"
+					>
 						{{ stepData.conx_1_xiangxi_fangan_time }}
 					</div>
 				</div>
@@ -140,14 +145,17 @@
 			<div class="step_box_content_flex">
 				<div class="step_box_left">院方反馈（尽可能详述）</div>
 			</div>
-			<div class="step_box_content_flex border borderAll">
+			<div
+				class="step_box_content_flex border borderAll"
+				:class="{ step_box_red: !conx_1_xiangxi_fankui.length }"
+			>
 				<textarea cols="30" rows="5" v-model="conx_1_xiangxi_fankui" placeholder="请输入院方反馈"></textarea>
 			</div>
 		</div>
 		<div class="step_box_content">
 			<div class="step_box_content_flex">
 				<div class="step_box_left">是否已确认方案</div>
-				<div class="step_box_right">
+				<div class="step_box_right" :class="{ step_box_red: !conx_1_xiangxi_queren.length }">
 					<label class="step_label"
 						><input type="radio" value="是" v-model="conx_1_xiangxi_queren" />是&nbsp;&nbsp;</label
 					>

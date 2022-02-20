@@ -4,7 +4,7 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">是否已临床提单</div>
-				<div class="step_box_right">
+				<div class="step_box_right" :class="{ step_box_red: !az_2_linchuang_tidan.length }">
 					<label class="step_label"
 						><input type="radio" value="是" v-model="az_2_linchuang_tidan" />是&nbsp;&nbsp;</label
 					>
@@ -14,7 +14,12 @@
 			<div class="step_box_content_flex">
 				<div class="step_box_left step_box_left_label">临床提单日期</div>
 				<div class="step_box_right">
-					<div ref="tidanTime" id="tidanTime" class="select-tab-bg">
+					<div
+						ref="tidanTime"
+						:class="{ step_box_red: az_2_linchuang_tidan_time === '点击选择日期' }"
+						id="tidanTime"
+						class="select-tab-bg"
+					>
 						{{ az_2_linchuang_tidan_time }}
 					</div>
 				</div>
@@ -26,7 +31,7 @@
 			</div>
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left step_box_left_label">设备科是否已批准</div>
-				<div class="step_box_right">
+				<div class="step_box_right" :class="{ step_box_red: !az_2_linchuang_pizhun.length }">
 					<label class="step_label"
 						><input type="radio" value="是" v-model="az_2_linchuang_pizhun" />是&nbsp;&nbsp;</label
 					>
@@ -43,14 +48,19 @@
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left step_box_left_label">时间</div>
 				<div class="step_box_right width80">
-					<div ref="shanghuiTime" id="shanghuiTime" class="select-tab-bg">
+					<div
+						ref="shanghuiTime"
+						id="shanghuiTime"
+						class="select-tab-bg"
+						:class="{ step_box_red: az_2_shanghui_time === '点击选择日期' }"
+					>
 						{{ az_2_shanghui_time }}
 					</div>
 				</div>
 			</div>
 			<div class="step_box_content_flex">
 				<div class="step_box_left step_box_left_label">结果</div>
-				<div class="step_box_right">
+				<div class="step_box_right" :class="{ step_box_red: !az_2_shanghui_jieguo.length }">
 					<input type="text" v-model="az_2_shanghui_jieguo" placeholder="请输入结果" />
 				</div>
 			</div>
@@ -62,7 +72,7 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">是否需要招标</div>
-				<div class="step_box_right">
+				<div class="step_box_right" :class="{ step_box_red: !az_2_zhaobiao.length }">
 					<label class="step_label"
 						><input type="radio" value="是" v-model="az_2_zhaobiao" />是&nbsp;&nbsp;</label
 					>
@@ -74,7 +84,7 @@
 			<div class="step_box_content">
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left">招标材料是否准备就绪</div>
-					<div class="step_box_right">
+					<div class="step_box_right" :class="{ step_box_red: !az_2_zhaobiao_zhunbei.length }">
 						<label class="step_label"
 							><input type="radio" value="是" v-model="az_2_zhaobiao_zhunbei" />是&nbsp;&nbsp;</label
 						>
@@ -91,14 +101,19 @@
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left step_box_left_label">时间</div>
 					<div class="step_box_right width80">
-						<div ref="azzhaobiaoTime" id="azzhaobiaoTime" class="select-tab-bg">
+						<div
+							ref="azzhaobiaoTime"
+							id="azzhaobiaoTime"
+							class="select-tab-bg"
+							:class="{ step_box_red: az_2_zhaobiao_shijian === '点击选择日期' }"
+						>
 							{{ az_2_zhaobiao_shijian }}
 						</div>
 					</div>
 				</div>
 				<div class="step_box_content_flex">
 					<div class="step_box_left step_box_left_label">结果</div>
-					<div class="step_box_right">
+					<div class="step_box_right" :class="{ step_box_red: !az_2_zhaobiao_jieguo.length }">
 						<input type="text" v-model="az_2_zhaobiao_jieguo" placeholder="请输入结果" />
 					</div>
 				</div>
@@ -112,7 +127,7 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">是否需要招标</div>
-				<div class="step_box_right">
+				<div class="step_box_right" :class="{ step_box_red: !conx_2_zhaobiao.length }">
 					<label class="step_label"
 						><input type="radio" value="是" v-model="conx_2_zhaobiao" />是&nbsp;&nbsp;</label
 					>
@@ -124,7 +139,7 @@
 			<div class="step_box_content">
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left">招标材料是否准备就绪</div>
-					<div class="step_box_right">
+					<div class="step_box_right" :class="{ step_box_red: !conx_2_zhaobiao_zhunbei.length }">
 						<label class="step_label"
 							><input type="radio" value="是" v-model="conx_2_zhaobiao_zhunbei" />是&nbsp;&nbsp;</label
 						>
@@ -141,14 +156,19 @@
 				<div class="step_box_content_flex border borderBottom">
 					<div class="step_box_left step_box_left_label">时间</div>
 					<div class="step_box_right width80">
-						<div ref="conxzhaobiaoTime" id="conxzhaobiaoTime" class="select-tab-bg">
+						<div
+							ref="conxzhaobiaoTime"
+							id="conxzhaobiaoTime"
+							class="select-tab-bg"
+							:class="{ step_box_red: conx_2_zhaobiao_shijian === '点击选择日期' }"
+						>
 							{{ conx_2_zhaobiao_shijian }}
 						</div>
 					</div>
 				</div>
 				<div class="step_box_content_flex">
 					<div class="step_box_left step_box_left_label">结果</div>
-					<div class="step_box_right">
+					<div class="step_box_right" :class="{ step_box_red: !conx_2_zhaobiao_jieguo.length }">
 						<input type="text" v-model="conx_2_zhaobiao_jieguo" placeholder="请输入结果" />
 					</div>
 				</div>

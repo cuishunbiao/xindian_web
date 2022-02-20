@@ -4,7 +4,7 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">数据是否已对接联盟平台</div>
-				<div class="step_box_right">
+				<div class="step_box_right" :class="{ step_box_red: !lianmeng_4_duijie.length }">
 					<label class="step_label"
 						><input type="radio" value="是" v-model="lianmeng_4_duijie" />是&nbsp;&nbsp;</label
 					>
@@ -19,7 +19,7 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">数据是否已对接联盟平台</div>
-				<div class="step_box_right">
+				<div class="step_box_right" :class="{ step_box_red: !conx_4_duijie.length }">
 					<label class="step_label"
 						><input type="radio" value="是" v-model="conx_4_duijie" />是&nbsp;&nbsp;</label
 					>

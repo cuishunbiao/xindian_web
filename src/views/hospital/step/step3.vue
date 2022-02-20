@@ -4,7 +4,7 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">是否完成签署</div>
-				<div class="step_box_right">
+				<div class="step_box_right" :class="{ step_box_red: !az_3_qianshu.length }">
 					<label class="step_label"
 						><input type="radio" value="是" v-model="az_3_qianshu" />是&nbsp;&nbsp;</label
 					>
@@ -14,7 +14,12 @@
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left step_box_left_label">时间</div>
 				<div class="step_box_right width80">
-					<div ref="qianshu1Time" id="qianshu1Time" class="select-tab-bg">
+					<div
+						ref="qianshu1Time"
+						id="qianshu1Time"
+						class="select-tab-bg"
+						:class="{ step_box_red: stepData.az_3_qianshu_shijian === '点击选择日期' }"
+					>
 						{{ stepData.az_3_qianshu_shijian }}
 					</div>
 				</div>
@@ -23,7 +28,7 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">是否开票付款</div>
-				<div class="step_box_right">
+				<div class="step_box_right" :class="{ step_box_red: !az_3_kaipiao.length }">
 					<label class="step_label"
 						><input type="radio" value="是" v-model="az_3_kaipiao" />是&nbsp;&nbsp;</label
 					>
@@ -32,7 +37,7 @@
 			</div>
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left step_box_left_label">金额</div>
-				<div class="step_box_right">
+				<div class="step_box_right" :class="{ step_box_red: !stepData.az_3_kaipiao_jine.length }">
 					<input type="number" v-model="stepData.az_3_kaipiao_jine" placeholder="请输入金额" />
 				</div>
 			</div>
@@ -44,7 +49,7 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">是否完成签署</div>
-				<div class="step_box_right">
+				<div class="step_box_right" :class="{ step_box_red: !conx_3_qianshu.length }">
 					<label class="step_label"
 						><input type="radio" value="是" v-model="conx_3_qianshu" />是&nbsp;&nbsp;</label
 					>
@@ -54,7 +59,12 @@
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left step_box_left_label">时间</div>
 				<div class="step_box_right width80">
-					<div ref="qianshu2Time" id="qianshu2Time" class="select-tab-bg">
+					<div
+						ref="qianshu2Time"
+						id="qianshu2Time"
+						class="select-tab-bg"
+						:class="{ step_box_red: stepData.conx_3_qianshu_shijian === '点击选择日期' }"
+					>
 						{{ stepData.conx_3_qianshu_shijian }}
 					</div>
 				</div>
@@ -63,7 +73,7 @@
 		<div class="step_box_content">
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left">是否开票付款</div>
-				<div class="step_box_right">
+				<div class="step_box_right" :class="{ step_box_red: !conx_3_kaipiao.length }">
 					<label class="step_label"
 						><input type="radio" value="是" v-model="conx_3_kaipiao" />是&nbsp;&nbsp;</label
 					>
@@ -72,7 +82,7 @@
 			</div>
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left step_box_left_label">金额</div>
-				<div class="step_box_right">
+				<div class="step_box_right" :class="{ step_box_red: !stepData.conx_3_kaipiao_jine.length }">
 					<input type="number" v-model="stepData.conx_3_kaipiao_jine" placeholder="请输入金额" />
 				</div>
 			</div>
