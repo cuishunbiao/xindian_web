@@ -259,6 +259,12 @@ const submitFn = () => {
 				}
 			})
 		} else {
+			if (stepData.az_3_qianshu_shijian === '') {
+				stepData.az_3_qianshu_shijian = '点击选择日期'
+			}
+			if (stepData.conx_3_qianshu_shijian === '') {
+				stepData.conx_3_qianshu_shijian = '点击选择日期'
+			}
 			errorFn(res.msg)
 		}
 	})

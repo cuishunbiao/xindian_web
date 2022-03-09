@@ -380,6 +380,18 @@ const submitFn = () => {
 				}
 			})
 		} else {
+			if (stepData.az_2_shanghui_time === '') {
+				stepData.az_2_shanghui_time = '点击选择日期'
+			}
+			if (stepData.conx_2_zhaobiao_shijian === '') {
+				stepData.conx_2_zhaobiao_shijian = '点击选择日期'
+			}
+			if (stepData.az_2_zhaobiao_shijian === '') {
+				stepData.az_2_zhaobiao_shijian = '点击选择日期'
+			}
+			if (stepData.az_2_linchuang_tidan_time === '') {
+				stepData.az_2_linchuang_tidan_time = '点击选择日期'
+			}
 			errorFn(res.msg)
 		}
 	})

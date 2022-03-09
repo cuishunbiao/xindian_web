@@ -10,7 +10,7 @@
 				<div class="step_box_left step_box_left_label">形式</div>
 				<div class="step_box_right">{{ lianmeng_1_tz_type }}</div>
 			</div>
-			<div class="step_box_content_flex">
+			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left step_box_left_label">时间</div>
 				<div class="step_box_right width80">{{ lianmeng_1_tz_time }}</div>
 			</div>
@@ -23,9 +23,13 @@
 				<div class="step_box_left step_box_left_label">姓名</div>
 				<div class="step_box_right">{{ stepData.lianmeng_1_yuanfang_name }}</div>
 			</div>
-			<div class="step_box_content_flex">
+			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left step_box_left_label">职位</div>
 				<div class="step_box_right">{{ stepData.lianmeng_1_yuanfang_zhiwei }}</div>
+			</div>
+			<div class="step_box_content_flex border borderBottom">
+				<div class="step_box_left step_box_left_label">联系方式</div>
+				<div class="step_box_right">{{ stepData.lianmeng_1_yuanfang_lianxi }}</div>
 			</div>
 		</div>
 		<div class="step_box_content paddingB30">
@@ -83,6 +87,12 @@
 				<div class="step_box_left step_box_left_label">职位</div>
 				<div class="step_box_right" :class="{ step_box_red: !az_1_yuanfang_name.length }">
 					<input type="text" v-model="az_1_yuanfang_zhiwei" placeholder="请输入职位" />
+				</div>
+			</div>
+			<div class="step_box_content_flex">
+				<div class="step_box_left step_box_left_label">联系方式</div>
+				<div class="step_box_right" :class="{ step_box_red: !az_1_yuanfang_lianxi.length }">
+					<input type="number" v-model="az_1_yuanfang_lianxi" placeholder="请输入联系方式" />
 				</div>
 			</div>
 		</div>
@@ -223,12 +233,14 @@ interface stepDataTS {
 	lianmeng_1_tz_type: String
 	lianmeng_1_tz_time: String
 	lianmeng_1_yuanfang_name: String
+	lianmeng_1_yuanfang_lianxi: String
 	lianmeng_1_yuanfang_zhiwei: String
 	lianmeng_1_yuanfang_fankui: any
 	lianmeng_1_baoming: String
 	az_1_fangan: String
 	az_1_fangan_time: String
 	az_1_yuanfang_name: String
+	az_1_yuanfang_lianxi: String
 	az_1_yuanfang_zhiwei: String
 	az_1_yuanfang_fankui: any
 	az_1_xiangxi_fangan: String
@@ -245,7 +257,9 @@ let stepData = reactive<stepDataTS>({
 	lianmeng_1_tz_status: '',
 	lianmeng_1_tz_type: '',
 	lianmeng_1_tz_time: '',
+	lianmeng_1_yuanfang_lianxi: '',
 	lianmeng_1_yuanfang_name: '',
+	az_1_yuanfang_lianxi: '',
 	lianmeng_1_yuanfang_zhiwei: '',
 	lianmeng_1_yuanfang_fankui: '',
 	lianmeng_1_baoming: '',
@@ -305,6 +319,12 @@ const submitFn = () => {
 				}
 			})
 		} else {
+			if (stepData.az_1_fangan_time === '') {
+				stepData.az_1_fangan_time = '点击选择日期'
+			}
+			if (stepData.az_1_xiangxi_fangan_time === '') {
+				stepData.az_1_xiangxi_fangan_time = '点击选择日期'
+			}
 			errorFn(res.msg)
 		}
 	})
@@ -315,6 +335,7 @@ const {
 	lianmeng_1_baoming,
 	lianmeng_1_tz_type,
 	lianmeng_1_tz_time,
+	lianmeng_1_yuanfang_lianxi,
 	lianmeng_1_yuanfang_fankui,
 	az_1_yuanfang_fankui,
 	az_1_xiangxi_fankui,
@@ -327,6 +348,7 @@ const {
 	conx_1_xiangxi_queren,
 	az_1_fangan_time,
 	az_1_yuanfang_name,
+	az_1_yuanfang_lianxi,
 	az_1_yuanfang_zhiwei
 } = {
 	...toRefs(stepData)

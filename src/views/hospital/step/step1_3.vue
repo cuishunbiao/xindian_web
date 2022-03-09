@@ -271,6 +271,9 @@ const submitFn = () => {
 				}
 			})
 		} else {
+			if (stepData.conx_1_xiangxi_fangan_time === '') {
+				stepData.conx_1_xiangxi_fangan_time = '点击选择日期'
+			}
 			errorFn(res.msg)
 		}
 	})

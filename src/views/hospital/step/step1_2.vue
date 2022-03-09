@@ -41,10 +41,16 @@
 					<input type="text" v-model="stepData.lianmeng_1_yuanfang_name" placeholder="请输入姓名" />
 				</div>
 			</div>
-			<div class="step_box_content_flex">
+			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left step_box_left_label">职位</div>
 				<div class="step_box_right" :class="{ step_box_red: !stepData.lianmeng_1_yuanfang_zhiwei.length }">
 					<input type="text" v-model="stepData.lianmeng_1_yuanfang_zhiwei" placeholder="请输入职位" />
+				</div>
+			</div>
+			<div class="step_box_content_flex border borderBottom">
+				<div class="step_box_left step_box_left_label">联系方式</div>
+				<div class="step_box_right" :class="{ step_box_red: !stepData.lianmeng_1_yuanfang_lianxi.length }">
+					<input type="text" v-model="stepData.lianmeng_1_yuanfang_lianxi" placeholder="请输入联系方式" />
 				</div>
 			</div>
 		</div>
@@ -93,9 +99,13 @@
 				<div class="step_box_left step_box_left_label">姓名</div>
 				<div class="step_box_right">{{ stepData.az_1_yuanfang_name }}</div>
 			</div>
-			<div class="step_box_content_flex">
+			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left step_box_left_label">职位</div>
 				<div class="step_box_right">{{ stepData.az_1_yuanfang_zhiwei }}</div>
+			</div>
+			<div class="step_box_content_flex border borderBottom">
+				<div class="step_box_left step_box_left_label">联系方式</div>
+				<div class="step_box_right">{{ stepData.az_1_yuanfang_lianxi }}</div>
 			</div>
 		</div>
 		<div class="step_box_content paddingB30">
@@ -228,11 +238,13 @@ interface stepDataTS {
 	lianmeng_1_tz_time: String
 	lianmeng_1_yuanfang_name: String
 	lianmeng_1_yuanfang_zhiwei: String
+	lianmeng_1_yuanfang_lianxi: String
 	lianmeng_1_yuanfang_fankui: any
 	lianmeng_1_baoming: String
 	az_1_fangan: String
 	az_1_yuanfang_name: String
 	az_1_yuanfang_zhiwei: String
+	az_1_yuanfang_lianxi: String
 	az_1_yuanfang_fankui: any
 	az_1_xiangxi_fangan: String
 	az_1_xiangxi_fankui: String
@@ -257,11 +269,13 @@ let stepData = reactive<stepDataTS>({
 	lianmeng_1_tz_time: '',
 	lianmeng_1_yuanfang_name: '',
 	lianmeng_1_yuanfang_zhiwei: '',
+	lianmeng_1_yuanfang_lianxi: '',
 	lianmeng_1_yuanfang_fankui: '',
 	lianmeng_1_baoming: '',
 	az_1_fangan: '',
 	az_1_yuanfang_name: '',
 	az_1_yuanfang_zhiwei: '',
+	az_1_yuanfang_lianxi: '',
 	az_1_yuanfang_fankui: '',
 	az_1_xiangxi_fangan: '',
 	az_1_xiangxi_fankui: '',
@@ -329,6 +343,9 @@ const submitFn = () => {
 				}
 			})
 		} else {
+			if (stepData.lianmeng_1_tz_time === '') {
+				stepData.lianmeng_1_tz_time = '点击选择日期'
+			}
 			errorFn(res.msg)
 		}
 	})
