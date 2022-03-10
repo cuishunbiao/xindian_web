@@ -49,7 +49,7 @@
 			</div>
 			<div class="step_box_content_flex border borderBottom">
 				<div class="step_box_left step_box_left_label">联系方式</div>
-				<div class="step_box_right" :class="{ step_box_red: !stepData.lianmeng_1_yuanfang_lianxi.length }">
+				<div class="step_box_right">
 					<input type="text" v-model="stepData.lianmeng_1_yuanfang_lianxi" placeholder="请输入联系方式" />
 				</div>
 			</div>

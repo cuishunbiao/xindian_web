@@ -91,7 +91,7 @@
 			</div>
 			<div class="step_box_content_flex">
 				<div class="step_box_left step_box_left_label">联系方式</div>
-				<div class="step_box_right" :class="{ step_box_red: !az_1_yuanfang_lianxi.length }">
+				<div class="step_box_right">
 					<input type="number" v-model="az_1_yuanfang_lianxi" placeholder="请输入联系方式" />
 				</div>
 			</div>
