@@ -106,7 +106,7 @@ const qianshu1Time = ref<HTMLElement | null>(null)
 const qianshu2Time = ref<HTMLElement | null>(null)
 const router = useRouter()
 const route = useRoute()
-const { type, hospital_id, step, city } = route.query
+const { type, hospital_id, step, city, province } = route.query
 const stepBoxAZ = ref<HTMLElement | null>(null)
 const stepBoxCONX = ref<HTMLElement | null>(null)
 
@@ -246,7 +246,8 @@ const submitFn = () => {
 					path: `/hospital`,
 					query: {
 						type,
-						city
+						city,
+						province
 					}
 				})
 				return

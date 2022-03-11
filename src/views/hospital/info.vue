@@ -38,7 +38,7 @@ import { useRoute, useRouter } from 'vue-router'
 const router = useRouter()
 const route = useRoute()
 const currentIndex = ref(1)
-const { type, city } = route.query
+const { type, city, province } = route.query
 
 //判断当前医院在第几步
 // getStepApi({

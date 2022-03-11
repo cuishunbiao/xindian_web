@@ -25,7 +25,7 @@ import { getHospitalApi } from '@Request/api'
 import { errorFn } from '@Assets/ts/common'
 import router from '@/router'
 const route = useRoute()
-const { city, type } = route.query
+const { city, province, type } = route.query
 const hospitalLists = ref<any[]>([])
 const hospital_name = ref('')
 
@@ -42,6 +42,7 @@ const backAreaFn = () => {
 const getHospitalFn = () => {
 	getHospitalApi({
 		city,
+		province,
 		hospital_name: hospital_name.value
 	}).then((res: any) => {
 		if (res.status === 1) {
@@ -59,7 +60,8 @@ const toStepPageFn = (item: any) => {
 		query: {
 			...item,
 			type,
-			city
+			city,
+			province
 		}
 	})
 }

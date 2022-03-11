@@ -64,7 +64,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { postEditZhiyuanApi, getStepApi } from '@Request/api'
 import { errorFn } from '@Assets/ts/common'
 const route = useRoute()
-const { hospital_id, step, type, city, id } = route.query
+const { hospital_id, step, type, city, province, id } = route.query
 const router = useRouter()
 const azBox = ref<HTMLElement | null>(null)
 const conxBox = ref<HTMLElement | null>(null)
@@ -75,7 +75,8 @@ const backFn = () => {
 		path: `/hospital`,
 		query: {
 			type,
-			city
+			city,
+			province
 		}
 	})
 }
@@ -85,7 +86,8 @@ const nextFn = () => {
 		path: `/hospital`,
 		query: {
 			type,
-			city
+			city,
+			province
 		}
 	})
 }
@@ -162,7 +164,8 @@ const toStepPageFn = () => {
 			type,
 			hospital_id: id,
 			step: stepNumber,
-			city
+			city,
+			province
 		}
 	})
 }

@@ -42,7 +42,7 @@ import { errorFn } from '@Assets/ts/common'
 import { getStepApi, postEditStepApi } from '@Request/api'
 const router = useRouter()
 const route = useRoute()
-const { type, hospital_id, step, city } = route.query
+const { type, hospital_id, step, city, province } = route.query
 const stepBoxLianmeng = ref<HTMLElement | null>(null)
 const stepBoxCONX = ref<HTMLElement | null>(null)
 
@@ -93,7 +93,8 @@ const submitFn = () => {
 				path: `/hospital`,
 				query: {
 					type,
-					city
+					city,
+					province
 				}
 			})
 		} else {

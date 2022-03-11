@@ -23,6 +23,7 @@
 				<div class="content_form border borderBottom">
 					<select v-model="city">
 						<option value="">请选择市</option>
+						<option value="">全部市</option>
 						<option v-for="(item, index) in cityData" :key="index" :value="item">{{ item }}</option>
 					</select>
 				</div>
@@ -46,6 +47,7 @@ const provinceIndex = ref('')
 const provinceData = ref<any[]>([])
 
 const city = ref('')
+const provinceName = ref('')
 const cityData = ref<any[]>([])
 
 //获取省市
@@ -59,17 +61,16 @@ getSearchApi().then((res: any) => {
 
 //选择省
 const provinceChangeFn = (index: any) => {
-	cityData.value = provinceData.value[index].children
+	const { name, children } = provinceData.value[index]
+	provinceName.value = name
+	cityData.value = children
 }
 
 const submitFn = () => {
-	if (!city.value) {
-		errorFn('请选择城市')
-		return
-	}
 	router.push({
 		path: '/hospital',
 		query: {
+			province: provinceName.value,
 			city: city.value,
 			type: route.query.type
 		}

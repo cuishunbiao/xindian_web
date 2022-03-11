@@ -178,7 +178,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { postEditStepApi, getStepApi } from '@Request/api'
 import { MONTHNUM, YEARNUM, DAYNUM, HOUR, MINUTER, errorFn } from '@Assets/ts/common'
 const route = useRoute()
-const { hospital_id, step, type, city } = route.query
+const { hospital_id, step, type, city, province } = route.query
 const router = useRouter()
 
 const backFn = () => {
@@ -186,7 +186,8 @@ const backFn = () => {
 		path: `/hospital`,
 		query: {
 			type,
-			city
+			city,
+			province
 		}
 	})
 }

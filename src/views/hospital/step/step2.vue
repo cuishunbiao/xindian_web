@@ -190,7 +190,7 @@ import { getStepApi, postEditStepApi } from '@Request/api'
 const shanghuiTime = ref<HTMLElement | null>(null)
 const router = useRouter()
 const route = useRoute()
-const { type, hospital_id, step, city } = route.query
+const { type, hospital_id, step, city, province } = route.query
 const stepBoxAZzhaobiao = ref<HTMLElement | null>(null)
 const stepBoxCONXzhaobiao = ref<HTMLElement | null>(null)
 const stepBoxLianmeng = ref<HTMLElement | null>(null)
