@@ -1,25 +1,25 @@
 <template>
 	<div class="info">
 		<ul class="info_tabs">
-			<li @click="goStepFn(1)" class="on">
+			<li class="on">
 				<div class="info_tabs_content">
 					<span></span>
 					<p>阶段1</p>
 				</div>
 			</li>
-			<li @click="goStepFn(2)" :class="{ on: currentIndex >= 2 }">
+			<li :class="{ on: currentIndex >= 2 }">
 				<div class="info_tabs_content">
 					<span></span>
 					<p>阶段2</p>
 				</div>
 			</li>
-			<li @click="goStepFn(3)" :class="{ on: currentIndex >= 3 }">
+			<li :class="{ on: currentIndex >= 3 }">
 				<div class="info_tabs_content">
 					<span></span>
 					<p>阶段3</p>
 				</div>
 			</li>
-			<li v-if="type != '1'" @click="goStepFn(4)" :class="{ on: currentIndex >= 4 }">
+			<li v-if="type != '1'" :class="{ on: currentIndex >= 4 }">
 				<div class="info_tabs_content">
 					<span></span>
 					<p>阶段4</p>
