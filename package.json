@@ -1,7 +1,7 @@
 {
 	"name": "xindian_web",
 	"private": true,
-	"version": "1.0.1",
+	"version": "1.0.0",
 	"publishConfig": {
 		"access": "public"
 	},
@@ -9,8 +9,7 @@
 		"dev": "vite",
 		"build": "vite build",
 		"preview": "vite preview",
-		"release": "release-it",
-		"changelog": "changelog"
+		"release": "release-it"
 	},
 	"dependencies": {
 		"axios": "^0.25.0",
