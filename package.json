@@ -1,7 +1,23 @@
 {
 	"name": "xindian_web",
 	"version": "1.0.0",
-	"registry": "git@github.com:cuishunbiao/xindian_web.git",
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:cuishunbiao/xindian_web.git"
+	},
+	"publishConfig": {
+		"registry": "https://registry.npmjs.com/"
+	},
+	"bugs": {
+		"url": "https://github.com/cuishunbiao/xindian_web/issues",
+		"email": "860026526@qq.com"
+	},
+	"contributors": [
+		{
+			"name": "cuishunbiao",
+			"email": "860026526@qq.com"
+		}
+	],
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
