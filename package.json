@@ -1,7 +1,7 @@
 {
 	"name": "xindian_web",
-	"version": "1.1.2",
-	"registry": "https://github.com/cuishunbiao/xindian_web",
+	"version": "1.0.0",
+	"registry": "git@github.com:cuishunbiao/xindian_web.git",
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
