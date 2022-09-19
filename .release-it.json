@@ -1,0 +1,22 @@
+{
+	"git": {
+		"commitMessage": "chore: release v${version}",
+		"changelog": "npx auto-changelog --stdout --commit-limit false -u -t ./script/changelog.hbs"
+	},
+	"hooks": {
+		"before:init": "echo before:init",
+		"before:bump": "echo before:bump",
+		"before:release": "echo before:release",
+		"after:init": "echo after:init",
+		"after:bump": "npx auto-changelog -p --commit-limit false -u",
+		"after:release": "echo after:release"
+	},
+	"github": {
+		"assets": ["dist/**/*"],
+		"release": true,
+		"releaseName": "v${version}"
+	},
+	"npm": {
+		"publish": false
+	}
+}

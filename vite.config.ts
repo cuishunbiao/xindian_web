@@ -27,8 +27,5 @@ export default defineConfig({
 				rewrite: (path) => path.replace(/^\/api/, '')
 			}
 		}
-	},
-	build: {
-		outDir: '/Users/cuishunbiao/study/xindian/xindianyzw'
 	}
 })
